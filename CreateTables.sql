@@ -27,6 +27,12 @@ CREATE TABLE Customer {
         Username varchar(255) foreign key references User(Username)
 };
 
+CREATE TABLE PreferredTheater {
+        foreign key TheaterID references Theater(TheaterID),
+        foreign key Username references Customer(Username),
+        primary key (TheaterID, Username)
+};
+
 
 CREATE TABLE CreditCard {
         CardNumber char(16) primary key,
