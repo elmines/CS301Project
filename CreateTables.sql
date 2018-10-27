@@ -63,7 +63,7 @@ Time timestamp
 
 
 Create Table Review {
-        Name varchar(255) foreign key references Movie(Name),
+        MovieName varchar(255) foreign key references Movie(Name),
         Username varchar(255) foreign key references User(Username),
         ReviewID int  primary key,
 Title varchar(255),
