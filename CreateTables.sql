@@ -1,103 +1,105 @@
-﻿CREATE TABLE Theater {
-        TheaterID int primary key,
-        Name varchar(255),
-        State varchar(255),
-        City varchar(255),
+create table Theater (
+        TheaterID    int           primary key,
+        Name         varchar(255),
+        State        varchar(255),
+        City         varchar(255),
         StreetNumber varchar(255),
-        Street varchar(255),
-        Zip char(5),
-        CONSTRAINT Address UNIQUE (State, City, StreetNumber, Zip, Street)
-};
+        Street       varchar(255),
+        Zip          char(5),
+        constraint Address unique (State, City, StreetNumber, Zip, Street)
+);
 
 
-CREATE TABLE User {
-        EmailAddress varchar(255) not null,
-        Username varchar(255) not null,
-        Password varchar(255),
-        primary key(EmailAddress, Username)
-};
+create table AccountUser (
+        Username     varchar(255) primary key,
+        EmailAddress varchar(255) not null unique,
+        Password     varchar(255) not null unique
+);
 
 
-CREATE TABLE Manager {
-        Username varchar(255) foreign key references User(Username)
-};
+create table Manager (
+        Username varchar(255) primary key references AccountUser(Username)
+);
 
 
-CREATE TABLE Customer {
-        Username varchar(255) foreign key references User(Username)
-};
+create table Customer (
+        Username varchar(255) primary key references AccountUser(Username)
+);
 
-CREATE TABLE PreferredTheater {
-        TheaterID int          foreign key  references Theater(TheaterID),
-        Username  varchar(255) foreign key  references Customer(Username),
+create table PreferredTheater (
+        TheaterID int            references Theater(TheaterID),
+        Username  varchar(255)   references Customer(Username),
         primary key (TheaterID, Username)
-};
+);
 
 
-CREATE TABLE CreditCard {
-        CardNumber char(16) primary key,
-        Username varchar(255) foreign key references User(Username),
-        CVV char(3) not null,
-        Holder varchar(255) not null,
+create table CreditCard (
+        CardNumber     char(16)     not null,
+        Username       varchar(255) references Customer(Username),
+        CVV            char(3)      not null,
+        Holder         varchar(255) not null,
         ExpirationDate varchar(255) not null,
-};
+        Saved          int,
+        primary key (CardNumber, UserName)
+);
 
 
-CREATE TABLE Movie {
-        Name varchar(255) primary key,
-        AgeRating varchar(255),
+create table Movie (
+        Name        varchar(255) primary key,
+        AgeRating   varchar(255),
         ReleaseDate varchar(255),
-        Synopsis varchar(255),
-        Price double,
-        Duration time,
-        Genre varchar(255)
-};
+        Synopsis    varchar(255),
+        Price       float        not null,
+        Duration    int,
+        Genre       varchar(255)
+);
 
 
-CREATE TABLE Showing {
-        ShowingID int primary key,
-        Name varchar(255) foreign key references Movie(Name),
-        TheaterID int foreign key references Theater(TheaterID),
-Time timestamp
-};
+create table Showing (
+        ShowingID int          primary key,
+        Name      varchar(255) references Movie(Name),
+        TheaterID int          references Theater(TheaterID),
+        StartTime timestamp
+);
 
 
-Create Table Review {
-        MovieName varchar(255) foreign key references Movie(Name),
-        Username varchar(255) foreign key references User(Username),
-        ReviewID int  primary key,
-Title varchar(255),
-Comment varchar(2047),
-Rating int
-};
+create table Review (
+        ReviewID  int            primary key,
+        MovieName varchar(255)   references Movie(Name),
+        Username  varchar(255)   references Customer(Username),
+        Title     varchar(255),
+        Body      varchar(2047),
+        Rating    int            not null
+);
 
 
-CREATE TABLE Cast {
-MovieName varchar(255) foreign key references Movie(Name),
-CastID int primary key,
-Actor varchar(255),
-Character varchar(255)
-};
+create table Cast (
+        CastID    int           primary key,
+        MovieName varchar(255)  references Movie(Name),
+        Actor     varchar(255),
+        Character varchar(255)
+);
 
 
+create table TicketOrder (
+        OrderID       int           primary key,
+        ShowingID     int           references Showing(ShowingID),
+        Username      varchar(255),
+        CardNumber    char(16),
+        Cost          float         not null,
+        ChildTickets  int,
+        AdultTickets  int,
+        SeniorTickets int,
+        Status        varchar(255),
+
+        foreign key (CardNumber, Username) references CreditCard(CardNumber, UserName)
+);
 
 
-CREATE TABLE Order {
-        OrderID int primary key,
-Username varchar(255) foreign key references User(Username),
-        CardNumber char(16) foreign key references
-        CreditCard(CardNumber),
-ChildTickets int,
-AdultTickets int,
-SeniorTickets int,
-Status varchar(255)
-};
-
-
-CREATE TABLE SystemInfo {
-        SystemInfoID int primary key,
-        ManagerPassword varchar(255),
-        SeniorDiscount float,
-        ChildDiscount float,
-        RefundFee float,
-};
+create table SystemInfo (
+        SystemInfoID    int           primary key,
+        ManagerPassword varchar(255)  not null,
+        SeniorDiscount  float         not null,
+        ChildDiscount   float         not null,
+        RefundFee       float         not null
+);
