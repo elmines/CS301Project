@@ -42,8 +42,8 @@ CREATE TABLE Movie {
         AgeRating varchar(255),
         ReleaseDate varchar(255),
         Synopsis varchar(255),
-        Price double, 
-        Duration time, 
+        Price double,
+        Duration time,
         Genre varchar(255)
 };
 
@@ -62,12 +62,12 @@ Create Table Review {
         ReviewID int  primary key,
 Title varchar(255),
 Comment varchar(2047),
-Rating int 
+Rating int
 };
 
 
 CREATE TABLE Cast {
-Movie varchar(255) foreign key references Movie(Name),
+MovieName varchar(255) foreign key references Movie(Name),
 CastID int primary key,
 Actor varchar(255),
 Character varchar(255)
@@ -81,9 +81,9 @@ CREATE TABLE Order {
 Username varchar(255) foreign key references User(Username),
         CardNumber char(16) foreign key references
         CreditCard(CardNumber),
-ChildTickets int, 
-AdultTickets int, 
-SeniorTickets int, 
+ChildTickets int,
+AdultTickets int,
+SeniorTickets int,
 Status varchar(255)
 };
 
@@ -92,6 +92,6 @@ CREATE TABLE SystemInfo {
         SystemInfoID int primary key,
         ManagerPassword varchar(255),
         SeniorDiscount float,
-        ChildDiscount float, 
-        RefundFee float, 
+        ChildDiscount float,
+        RefundFee float,
 };
