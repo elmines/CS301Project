@@ -28,8 +28,8 @@ CREATE TABLE Customer {
 };
 
 CREATE TABLE PreferredTheater {
-        foreign key TheaterID references Theater(TheaterID),
-        foreign key Username references Customer(Username),
+        TheaterID int          foreign key  references Theater(TheaterID),
+        Username  varchar(255) foreign key  references Customer(Username),
         primary key (TheaterID, Username)
 };
 
