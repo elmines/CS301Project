@@ -13,7 +13,7 @@ create table Theater (
 create table AccountUser (
         Username     varchar(255) primary key,
         EmailAddress varchar(255) not null unique,
-        Password     varchar(255) not null unique
+        Password     varchar(255) not null
 );
 
 
@@ -39,7 +39,7 @@ create table CreditCard (
         CVV            char(3)      not null,
         Holder         varchar(255) not null,
         ExpirationDate varchar(255) not null,
-        Saved          int,                       --0 or NULL is false, everything else is true
+        Saved          int not null,                       --0, everything else is true
         primary key (CardNumber, UserName)
 );
 
@@ -50,7 +50,7 @@ create table Movie (
         ReleaseDate varchar(255),
         Synopsis    varchar(255),
         Price       float         not null check(Price >= 0),
-        Duration    int           check(Duration > 0),
+        Duration    int		  not null check(Duration > 0),
         Genre       varchar(255)
 );
 
@@ -69,7 +69,7 @@ create table Review (
         Username  varchar(255)   references Customer(Username),
         Title     varchar(255),
         Body      varchar(2047),
-        Rating    int            not null check(Rating >= 0)
+        Rating    int            not null check(Rating >= 0 AND Rating <= 5)
 );
 
 
