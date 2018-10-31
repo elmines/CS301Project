@@ -1,5 +1,5 @@
 create table Theater (
-        TheaterID    varchar(255)  primary key,
+        ID    	     varchar(255)  primary key,
         Name         varchar(255),
         State        varchar(255),
         City         varchar(255),
@@ -56,15 +56,15 @@ create table Movie (
 
 
 create table Showing (
-        ShowingID varchar(255) primary key,
-        Name      varchar(255) references Movie(Name),
-        TheaterID varchar(255) references Theater(TheaterID),
-        StartTime timestamp
+        ID 	  	varchar(255) primary key,
+        MovieName       varchar(255) references Movie(Name),
+        TheaterID 	varchar(255) references Theater(TheaterID),
+        StartTime 	timestamp
 );
 
 
 create table Review (
-        ReviewID  varchar(255)   primary key,
+        ID  	  varchar(255)   primary key,
         MovieName varchar(255)   references Movie(Name),
         Username  varchar(255)   references Customer(Username),
         Title     varchar(255),
@@ -74,7 +74,7 @@ create table Review (
 
 
 create table Cast (
-        CastID    varchar(255)  primary key,
+        ID    	  varchar(255)  primary key,
         MovieName varchar(255)  references Movie(Name),
         Actor     varchar(255),
         Character varchar(255)
@@ -82,7 +82,7 @@ create table Cast (
 
 
 create table TicketOrder (
-        OrderID       varchar(255)  primary key,
+        ID            varchar(255)  primary key,
         ShowingID     varchar(255)  references Showing(ShowingID),
         Username      varchar(255),
         CardNumber    char(16),
@@ -97,7 +97,7 @@ create table TicketOrder (
 
 
 create table SystemInfo (
-        SystemInfoID    varchar(255)  primary key,
+        ID    		varchar(255)  primary key,
         ManagerPassword varchar(255)  not null,
         SeniorDiscount  float         not null check(0.0 <= SeniorDiscount and SeniorDiscount <= 1.0),
         ChildDiscount   float         not null check(0.0 <= ChildDiscount and ChildDiscount <= 1.0),
