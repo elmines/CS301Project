@@ -27,7 +27,7 @@ create table Customer (
 );
 
 create table PreferredTheater (
-        TheaterID varchar(255) references Theater(TheaterID),
+        TheaterID varchar(255) references Theater(ID),
         Username  varchar(255) references Customer(Username),
         primary key (TheaterID, Username)
 );
@@ -50,16 +50,16 @@ create table Movie (
         ReleaseDate varchar(255),
         Synopsis    varchar(255),
         Price       float         not null check(Price >= 0),
-        Duration    int		  not null check(Duration > 0),
+        Duration    int           not null check(Duration > 0),
         Genre       varchar(255)
 );
 
 
 create table Showing (
-        ID 	  	varchar(255) primary key,
-        MovieName       varchar(255) references Movie(Name),
-        TheaterID 	varchar(255) references Theater(TheaterID),
-        StartTime 	timestamp
+        ID          varchar(255) primary key,
+        MovieName   varchar(255) references Movie(Name),
+        TheaterID 	varchar(255) references Theater(ID),
+        StartTime  timestamp
 );
 
 
@@ -83,7 +83,7 @@ create table Cast (
 
 create table TicketOrder (
         ID            varchar(255)  primary key,
-        ShowingID     varchar(255)  references Showing(ShowingID),
+        ShowingID     varchar(255)  references Showing(ID),
         Username      varchar(255),
         CardNumber    char(16),
         Cost          float         not null check(Cost >= 0),
@@ -97,7 +97,7 @@ create table TicketOrder (
 
 
 create table SystemInfo (
-        ID    		varchar(255)  primary key,
+        ID              varchar(255)  primary key,
         ManagerPassword varchar(255)  not null,
         SeniorDiscount  float         not null check(0.0 <= SeniorDiscount and SeniorDiscount <= 1.0),
         ChildDiscount   float         not null check(0.0 <= ChildDiscount and ChildDiscount <= 1.0),
