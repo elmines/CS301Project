@@ -1,5 +1,5 @@
 create table Theater (
-        TheaterID    int           primary key,
+        TheaterID    varchar(255)        primary key,
         Name         varchar(255),
         State        varchar(255),
         City         varchar(255),
@@ -27,7 +27,7 @@ create table Customer (
 );
 
 create table PreferredTheater (
-        TheaterID int            references Theater(TheaterID),
+        TheaterID varchar(255)            references Theater(TheaterID),
         Username  varchar(255)   references Customer(Username),
         primary key (TheaterID, Username)
 );
@@ -39,42 +39,42 @@ create table CreditCard (
         CVV            char(3)      not null,
         Holder         varchar(255) not null,
         ExpirationDate varchar(255) not null,
-        Saved          int,
+        Saved          int,                       --0 or NULL is false, everything else is true
         primary key (CardNumber, UserName)
 );
 
 
 create table Movie (
-        Name        varchar(255) primary key,
+        Name        varchar(255)  primary key,
         AgeRating   varchar(255),
         ReleaseDate varchar(255),
         Synopsis    varchar(255),
-        Price       float        not null,
-        Duration    int,
+        Price       float         not null check(Price >= 0),
+        Duration    int           check(Duration > 0),
         Genre       varchar(255)
 );
 
 
 create table Showing (
-        ShowingID int          primary key,
+        ShowingID varchar(255) primary key,
         Name      varchar(255) references Movie(Name),
-        TheaterID int          references Theater(TheaterID),
+        TheaterID varchar(255) references Theater(TheaterID),
         StartTime timestamp
 );
 
 
 create table Review (
-        ReviewID  int            primary key,
+        ReviewID  varchar(255)   primary key,
         MovieName varchar(255)   references Movie(Name),
         Username  varchar(255)   references Customer(Username),
         Title     varchar(255),
         Body      varchar(2047),
-        Rating    int            not null
+        Rating    int            not null check(Rating >= 0)
 );
 
 
 create table Cast (
-        CastID    int           primary key,
+        CastID    varchar(255)           primary key,
         MovieName varchar(255)  references Movie(Name),
         Actor     varchar(255),
         Character varchar(255)
@@ -82,14 +82,14 @@ create table Cast (
 
 
 create table TicketOrder (
-        OrderID       int           primary key,
-        ShowingID     int           references Showing(ShowingID),
+        OrderID       varchar(255)  primary key,
+        ShowingID     varchar(255)  references Showing(ShowingID),
         Username      varchar(255),
         CardNumber    char(16),
-        Cost          float         not null,
-        ChildTickets  int,
-        AdultTickets  int,
-        SeniorTickets int,
+        Cost          float         not null check(Cost >= 0),
+        ChildTickets  int           not null check(ChildTickets >= 0),
+        AdultTickets  int           not null check(AdultTickets >= 0),
+        SeniorTickets int           not null check(SeniorTickets >= 0),
         Status        varchar(255),
 
         foreign key (CardNumber, Username) references CreditCard(CardNumber, UserName)
@@ -97,9 +97,9 @@ create table TicketOrder (
 
 
 create table SystemInfo (
-        SystemInfoID    int           primary key,
+        SystemInfoID    varchar(255)  primary key,
         ManagerPassword varchar(255)  not null,
-        SeniorDiscount  float         not null,
-        ChildDiscount   float         not null,
-        RefundFee       float         not null
+        SeniorDiscount  float         not null check(0.0 <= SeniorDiscount and SeniorDiscount <= 1.0),
+        ChildDiscount   float         not null check(0.0 <= ChildDiscount and ChildDiscount <= 1.0),
+        RefundFee       float         not null check(RefundFee >= 0.0)
 );
