@@ -1,5 +1,5 @@
 create table Theater (
-        TheaterID    varchar(255)        primary key,
+        TheaterID    varchar(255)  primary key,
         Name         varchar(255),
         State        varchar(255),
         City         varchar(255),
@@ -27,8 +27,8 @@ create table Customer (
 );
 
 create table PreferredTheater (
-        TheaterID varchar(255)            references Theater(TheaterID),
-        Username  varchar(255)   references Customer(Username),
+        TheaterID varchar(255) references Theater(TheaterID),
+        Username  varchar(255) references Customer(Username),
         primary key (TheaterID, Username)
 );
 
@@ -74,7 +74,7 @@ create table Review (
 
 
 create table Cast (
-        CastID    varchar(255)           primary key,
+        CastID    varchar(255)  primary key,
         MovieName varchar(255)  references Movie(Name),
         Actor     varchar(255),
         Character varchar(255)
