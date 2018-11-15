@@ -1,7 +1,17 @@
-﻿@{
+﻿@model UAMovie.Models.AccountUser;
+@{
     ViewData["Title"] = "Home Page";
 }
+<h2>Welcome!</h2>
+<h4>Login</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Username);
+    @Html.EditorFor(model => model.Username);
+    <br />
 
-<div>
-    <p>Check out our <a asp-area="" asp-controller="AccountUser" asp-action="Create">Sign Up page</a>.</p>
-</div>
+    @Html.LabelFor(model => model.Password);
+    @Html.EditorFor(model => model.Password);
+}
+
+<p>Yet to experience the best movie site on the web? Sign up <a asp-area="" asp-controller="AccountUser" asp-action="Create">here</a>.</p>
