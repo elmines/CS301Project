@@ -1,0 +1,20 @@
+﻿@model UAMovie.Models.Theater;
+@{
+    ViewData["Title"] = "My Preferred Theaters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+    @{
+        Theater[] theaters = Theater.testData();
+        foreach (Theater t in theaters)
+        {
+            <div>
+                @Html.RadioButtonFor(model => model.ID, t.ID)
+                @t.Name <br />
+                @t.StreetNumber @t.Street  <br />
+                @t.City, @t.State  @t.Zip
+            </div>
+        }
+        <input type="submit" value="Remove" />
+    }
