@@ -11,7 +11,6 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class SystemInfoAccountUserController : Controller
     {
-        private String managerPassword;
         // GET: SystemInfoAccountUser
         public ActionResult Index()
         {
@@ -72,7 +71,7 @@ namespace UAMovie.Controllers.ViewModelControllers
             {
                 systemInfoAccountUser.user.insert();
                 Customer customer = new Customer();
-                customer.Username = systemInfoAccountUser.user.Username;
+                customer.username = systemInfoAccountUser.user.Username;
                 customer.insert();
             }
                     
