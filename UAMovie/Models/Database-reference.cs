@@ -9,11 +9,11 @@ using UAMovie.Models;
 
 namespace UAMovie.Models
 {
-    public class Database
+    public class DatabaseRef
     {
         public OracleConnection conn { get; set; }
         private String connString {get;set;}
-    public Database()
+    public DatabaseRef()
         {
             connString = "DATA SOURCE=vrbsky-oracle.ua-net.ua.edu:1521/xe;PERSIST SECURITY INFO=True;USER ID=BDJONES13;Password=123";
             conn = new OracleConnection();
