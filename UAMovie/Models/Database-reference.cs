@@ -15,7 +15,7 @@ namespace UAMovie.Models
         private String connString {get;set;}
     public Database()
         {
-            connString = "DATA SOURCE=vrbsky-oracle.ua-net.ua.edu:1521/xe;PERSIST SECURITY INFO=True;USER ID=BDJONES13;Password=98765";
+            connString = "DATA SOURCE=vrbsky-oracle.ua-net.ua.edu:1521/xe;PERSIST SECURITY INFO=True;USER ID=BDJONES13;Password=123";
             conn = new OracleConnection();
             conn.ConnectionString = connString;
             conn.Open();
