@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,17 @@ namespace UAMovie.Models
         public String ExpirationDate { get; set; }
         public Boolean Saved { get; set; }
 
+        public void insert()
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            String insertQuery = "INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('" + this.CardNumber + this.UserName + this.CVV + this.Holder + this.ExpirationDate + "'" + this.Saved + "')";
+            cmd.CommandText = insertQuery;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            db.Dispose();
+        }
 
         public static CreditCard[] testData()
         {
