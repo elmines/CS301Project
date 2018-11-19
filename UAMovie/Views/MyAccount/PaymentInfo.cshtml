@@ -1,0 +1,31 @@
+﻿@model UAMovie.Models.CreditCard;
+@{
+    ViewData["Title"] = "My Payment Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table>
+    <thead>
+        <td>Select</td>
+        <td>Number</td>
+        <td>Holder</td>
+        <td>Expiration Date</td>
+    </thead>
+
+    @{ 
+        CreditCard[] cards = CreditCard.testData();
+        foreach (CreditCard c in cards)
+        {
+            <tr>
+                <td>@Html.RadioButtonFor(model => model.CardNumber, c.CardNumber)</td>
+                <td>@c.CardNumber</td>
+                <td>@c.Holder</td>
+                <td>@c.ExpirationDate</td>
+            </tr>
+        }
+    }
+</table>
+<input type="submit" value="Remove"/>
+

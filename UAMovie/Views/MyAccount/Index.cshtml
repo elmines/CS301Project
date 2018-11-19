@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "My Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<ul>
+    <li><a asp-area="" asp-action="NowPlaying">Now Playing</a></li>
+    <li><a asp-area="" asp-action="OrderHistory">Order History</a></li>
+    <li><a asp-area="" asp-action="PaymentInfo">My Payment Info</a></li>
+    <li><a asp-area="" asp-action="PreferredTheater">My Preferred Theaters</a></li>
+</ul>

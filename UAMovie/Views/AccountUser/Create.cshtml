@@ -1,0 +1,39 @@
+﻿@model UAMovie.Models.ViewModels.SystemInfoAccountUser;
+
+@{
+    ViewData["Title"] = "Create User";
+}
+<h2>Create User</h2>
+@using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))
+{
+    @Html.LabelFor(model => model.user.Username);
+    @Html.EditorFor(model => model.user.Username);
+    <br />
+
+    @Html.LabelFor(model => model.user.EmailAddress);
+    @Html.EditorFor(model => model.user.EmailAddress);
+    <br />
+
+    @Html.LabelFor(model => model.user.Password);
+    @Html.EditorFor(model => model.user.Password);
+    <br />
+
+
+    @Html.LabelFor(model => model.info.ManagerPassword);
+    @Html.EditorFor(model => model.info.ManagerPassword);
+
+    @Html.HiddenFor(model => model.info.ChildDiscount);
+    @Html.HiddenFor(model => model.info.ID);
+    @Html.HiddenFor(model => model.info.RefundFee);
+    @Html.HiddenFor(model => model.info.SeniorDiscount);
+    <input type="submit" value="Create" class="btn btn-default" />
+
+
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

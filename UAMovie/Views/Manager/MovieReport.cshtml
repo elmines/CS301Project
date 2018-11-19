@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Movie Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie Report</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Movie</th>
+            <th>Number of Tickets</th>
+        </tr>
+
+    </thead>
+
+    @{
+        String[] Months = { "August", "September", "October" };
+        string[,] Movies = new string[,]
+        {
+        {"Christopher Robin", "Fast and Furious 57", "The Rise and Fall of Ben Jones"},
+        {"The Bourne Comedy", "Star Wars 0", "Taken 3"},
+        {"Venom", "Hotel Transylvannia 4", "Another Romantic Comedy"}
+        };
+        int[,] orders = { { 2000, 2, 9001 }, { 100, 0, 3 }, { 1, 4, 10000 } };
+
+        for (int i = 0; i < Months.Length; ++i)
+        {
+            for (int j = 0; j < Movies.GetLength(1); ++j)
+            {
+                <tr>
+                @{
+                    if (j == 0)
+                    {
+                        <td>@Months[i]</td>
+                    }
+                    else
+                    {
+                        <td> </td>
+                    }
+
+                    <td>@Movies[i, j]</td>
+                    <td>@orders[i, j]</td>
+
+                }
+                </tr>
+            }
+        }
+    }
+</table>
+
+<p>Go <a asp-area="" asp-action="Index">back</a></p>

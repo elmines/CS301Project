@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\bootstrap\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\**" />
+    <Compile Remove="wwwroot\lib\jquery\**" />
+    <Content Remove="wwwroot\lib\bootstrap\**" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\**" />
+    <Content Remove="wwwroot\lib\jquery\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery\**" />
+    <None Remove="wwwroot\lib\bootstrap\**" />
+    <None Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <None Remove="wwwroot\lib\jquery-validation\**" />
+    <None Remove="wwwroot\lib\jquery\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Signup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
+</Project>

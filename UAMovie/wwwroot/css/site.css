@@ -1,0 +1,24 @@
+﻿/* Hide/rearrange for smaller screens */
+
+body {
+    background-color: #990000;
+    font-family: Comic Sans MS, sans-serif;
+}
+
+.body-content {
+    background-color: #eeeeee;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

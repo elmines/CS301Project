@@ -1,0 +1,19 @@
+﻿@model UAMovie.Models.AccountUser;
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Welcome!</h2>
+<h4>Login</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Username);
+    @Html.EditorFor(model => model.Username);
+    <br />
+
+    @Html.LabelFor(model => model.Password);
+    @Html.EditorFor(model => model.Password);
+
+    <input type="submit" value="Login" class="btn btn-default" />
+}
+
+<p>Yet to experience the best movie site on the web? Sign up <a asp-area="" asp-controller="SystemInfoAccountUser" asp-action="Create">here</a>.</p>
