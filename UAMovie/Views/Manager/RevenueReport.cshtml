@@ -4,5 +4,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RevenueReport</h2>
+<h2>@ViewData["Title"]</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>Month</td>
+            <td>Revenue</td>
+        </tr>
+    </thead>
+
+    @{ 
+        String[] Months = { "August", "September", "November" };
+        float[] Revenue = { 2000.42f, 342.6f, 98.99f };
+
+        for (int i = 0; i < Months.Length; ++i)
+        {
+            <tr>
+                <td>@Months[i]</td>
+                <td>@String.Format("{0:C2}", Revenue[i])</td>
+            </tr>
+        }
+    }
+</table>
 
