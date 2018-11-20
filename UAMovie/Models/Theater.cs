@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UAMovie.Models;
+using Oracle.ManagedDataAccess.Client;
 
 namespace UAMovie.Models
 {
@@ -15,7 +17,38 @@ namespace UAMovie.Models
         public String Street { get; set; }
         public String Zip { get; set; }
 
+        public static List<Theater> SearchTheaters(String name, String city, String state)
+        {
+            Database db = new Database();
+           
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            //does this handle nulls? TO be determined...
+            //does this handle nulls? TO be determined...
+            String readQuery = "SELECT * FROM Theaters WHERE name=" + name + " OR city=" + city + " OR state=" + state;
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
 
+            List<Theater> list = new List<Theater>();
+            while (reader.Read())//gets a row or exits the loop if no more
+            {
+                Theater tempTheater = new Theater();            
+                tempTheater.ID = reader.GetString(0);
+                tempTheater.Name = reader.GetString(1);
+                tempTheater.State = reader.GetString(2);
+                tempTheater.City = reader.GetString(3);
+                tempTheater.StreetNumber = reader.GetString(4);
+                tempTheater.Street = reader.GetString(5);
+                tempTheater.Zip = reader.GetString(6);
+                list.Add(tempTheater);
+            }
+
+            cmd.Dispose();
+            db.Dispose();
+            return list;
+        }
+
+        
         public static Theater[] testData()
         {
             Theater[] data = new Theater[2];
