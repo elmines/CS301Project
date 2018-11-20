@@ -25,7 +25,7 @@ namespace UAMovie.Models.ViewModels
             //TODO: CHANGE THE QUERY TO JOIN ON PREFERREDTHEATERS
 
             //establish query
-            String readQuery = "SELECT * FROM Theaters";
+            String readQuery = "SELECT * FROM Theater";
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
 
