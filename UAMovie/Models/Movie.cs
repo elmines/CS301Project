@@ -11,8 +11,8 @@ namespace UAMovie.Models
         public String AgeRating { get; set; }
         public String ReleaseDate { get; set; }
         public String Synopsis { get; set; }
-        public float Prive { get; set; }
-        public int Duraction { get; set; }
+        public float Price { get; set; }
+        public int Duration { get; set; }
         public String Genre { get; set; }
     }
 }
