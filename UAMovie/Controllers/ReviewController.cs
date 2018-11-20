@@ -9,6 +9,11 @@ namespace UAMovie.Controllers
 {
     public class ReviewController : Controller
     {
+        public ActionResult Write()
+        {
+            return View();
+        }
+
         // GET: Review
         public ActionResult Index()
         {
