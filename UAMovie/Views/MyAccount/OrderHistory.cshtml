@@ -1,0 +1,34 @@
+﻿@model UAMovie.Models.TicketOrder;
+@{
+    ViewData["Title"] = "Order History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table>
+    <thead>
+    <td>Showing ID</td>
+    <td>Cost</td>
+    <td>Adult Tickets</td>
+    <td>Child Tickets</td>
+    <td>Senior Tickets</td>
+    <td>Status</td>
+    </thead>
+
+    @{
+        TicketOrder[] orders = TicketOrder.testData();
+        foreach (TicketOrder o in orders)
+        {
+            <tr>
+                <td>@o.ShowingID</td>
+                <td>@String.Format("{0:C2}", o.Cost)</td>
+                <td>@o.AdultTickets</td>
+                <td>@o.ChildTickets</td>
+                <td>@o.SeniorTickets</td>
+                <td>@o.Status</td>
+            </tr>
+        }
+    }
+</table>
+
