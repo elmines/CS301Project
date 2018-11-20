@@ -19,7 +19,7 @@ namespace UAMovie.Models
 
         public static List<Theater> SearchTheaters(String name, String city, String state)
         {
-            Database db = new Database();
+            DatabaseRef db = new DatabaseRef();
            
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;

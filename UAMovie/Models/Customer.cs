@@ -20,7 +20,7 @@ namespace UAMovie.Models
         }
         public void insert()
         {
-            Database db = new Database();
+            DatabaseRef db = new DatabaseRef();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO Customer (username) VALUES('" + this.username + "')";

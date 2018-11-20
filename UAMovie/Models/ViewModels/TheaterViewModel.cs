@@ -17,7 +17,7 @@ namespace UAMovie.Models.ViewModels
         public void GetPreferredTheaters()// puts the preffered theaters in the list.
         {
             //establish connection
-            Database db = new Database();
+            DatabaseRef db = new DatabaseRef();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
 
