@@ -22,7 +22,7 @@ namespace UAMovie.Models
             TicketOrder[] data = new TicketOrder[2];
             for (int i = 0; i < data.Length; ++i) data[i] = new TicketOrder();
 
-            data[0].ID = "0";
+            data[0].ID = "42";
             data[0].ShowingID = "24"; data[0].CardNumber = "1111222233334444";
             data[0].Cost = 40.00f; data[0].ChildTickets = 1; data[0].AdultTickets = 3;
             data[0].SeniorTickets = 2; data[0].Status = "Ordered";

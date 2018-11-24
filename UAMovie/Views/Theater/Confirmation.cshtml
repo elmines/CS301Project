@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Theater theater = UAMovie.Models.Theater.testData()[0];
+    Movie movie = UAMovie.Models.Movie.testData()[0];
+    CreditCard creditCard = UAMovie.Models.CreditCard.testData()[0];
+    TicketOrder order = TicketOrder.testData()[0];
+    Showing showing = Showing.testData()[0];
+}
+
+<h2>Order Confirmation</h2>
+
+<div>
+    <em>@movie.Name</em><br />
+    @theater.Name<br />
+    @theater.StreetNumber @theater.Street<br />
+    @theater.City, @theater.State @theater.Zip<br />
+    @showing.StartTime.ToLongDateString() at @showing.StartTime.ToLongTimeString()<br />
+</div>
+
+<p>
+    Order ID: @order.ID
+</p>
+Back to <a asp-area="" asp-controller="MyAccount" asp-action="Index">main menu</a>
+
