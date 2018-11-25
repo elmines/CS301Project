@@ -15,6 +15,16 @@ namespace UAMovie.Models
         public int Duration { get; set; }
         public String Genre { get; set; }
 
+        public String DurationText
+        {
+            get
+            {
+                int hours = this.Duration / 60;
+                int minutes = this.Duration % 60;
+                return String.Format("{0} hours and {1} minutes", hours, minutes);
+            }
+        }
+
         public static Movie[] testData()
         {
             Movie m = new Movie();
