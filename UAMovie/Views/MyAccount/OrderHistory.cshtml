@@ -6,31 +6,39 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<table>
-    <thead>
-        <tr>
-          <th>Showing ID</th>
-          <th>Cost</th>
-          <th>Adult Tickets</th>
-          <th>Child Tickets</th>
-          <th>Senior Tickets</th>
-          <th>Status</th>
-        </tr>
-    </thead>
 
-    @{
-        TicketOrder[] orders = TicketOrder.testData();
-        foreach (TicketOrder o in orders)
-        {
+
+@using (Html.BeginForm())
+{
+    <table>
+        <thead>
             <tr>
-                <td>@o.ShowingID</td>
-                <td>@String.Format("{0:C2}", o.Cost)</td>
-                <td>@o.AdultTickets</td>
-                <td>@o.ChildTickets</td>
-                <td>@o.SeniorTickets</td>
-                <td>@o.Status</td>
+                <th>Select</th>
+                <th>Showing ID</th>
+                <th>Cost</th>
+                <th>Adult Tickets</th>
+                <th>Child Tickets</th>
+                <th>Senior Tickets</th>
+                <th>Status</th>
             </tr>
+        </thead>
+
+        @{
+            TicketOrder[] orders = TicketOrder.testData();
+            foreach (TicketOrder o in orders)
+            {
+                <tr>
+                    <td>@Html.RadioButtonFor(model => model.ID, o.ID)</td>
+                    <td>@o.ShowingID</td>
+                    <td>@String.Format("{0:C2}", o.Cost)</td>
+                    <td>@o.AdultTickets</td>
+                    <td>@o.ChildTickets</td>
+                    <td>@o.SeniorTickets</td>
+                    <td>@o.Status</td>
+                </tr>
+            }
         }
-    }
-</table>
+    </table>
+    <input type="submit" value="View Details" />
+}
 
