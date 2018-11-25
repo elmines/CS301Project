@@ -16,13 +16,22 @@
 
 <h2>Order Confirmation</h2>
 
-<div>
+<p>
     <em>@movie.Name</em><br />
     @theater.Name<br />
     @theater.StreetNumber @theater.Street<br />
     @theater.City, @theater.State @theater.Zip<br />
     @showing.StartTime.ToLongDateString() at @showing.StartTime.ToLongTimeString()<br />
-</div>
+</p>
+
+<p>
+    Cost: @String.Format("{0:C2}", order.Cost)
+    <ul>
+        <li> @order.AdultTickets Adult Ticket(s)</li>
+        <li> @order.ChildTickets Child Ticket(s)</li>
+        <li> @order.SeniorTickets Senior Ticket(s)</li>
+    </ul>
+</p>
 
 <p>
     Order ID: @order.ID
