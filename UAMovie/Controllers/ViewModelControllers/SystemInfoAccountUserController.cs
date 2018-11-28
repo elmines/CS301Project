@@ -52,7 +52,8 @@ namespace UAMovie.Controllers.ViewModelControllers
                 reader.Dispose();
             }
             String inputPassword = systemInfoAccountUser.info.ManagerPassword;
-            if (inputPassword.Length > 0)
+            
+            if (!String.IsNullOrEmpty(inputPassword))
             {
                 if (inputPassword.Equals(managerPassword))
                 {

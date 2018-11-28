@@ -14,7 +14,10 @@ namespace UAMovie.Controllers
         {
             return View("~/Views/MyAccount/Index.cshtml",user);
         }
-
+        public ActionResult NowPlaying(AccountUser user)
+        {
+            return RedirectToAction("GetNowPlaying", "MovieAccountUserViewModel",new { user = user });
+        }
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
