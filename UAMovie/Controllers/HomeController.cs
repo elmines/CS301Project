@@ -14,7 +14,16 @@ namespace UAMovie.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public IActionResult Index(AccountUser user)
+        {
+            if(user.login())
+            {
+                return RedirectToAction("AccountUser", "Login", new {user = user });
+            }
+            //Error message?
+            return View();
+        }
         public IActionResult SignUp()
         {
             //View Data["Message"] = "";
