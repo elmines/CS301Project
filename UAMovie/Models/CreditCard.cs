@@ -17,7 +17,7 @@ namespace UAMovie.Models
 
         public void insert()
         {
-            DatabaseRef db = new DatabaseRef();
+            Database db = new Database();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('" + this.CardNumber + this.UserName + this.CVV + this.Holder + this.ExpirationDate + "'" + this.Saved + "')";

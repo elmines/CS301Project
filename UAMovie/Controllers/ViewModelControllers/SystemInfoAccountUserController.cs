@@ -36,7 +36,7 @@ namespace UAMovie.Controllers.ViewModelControllers
         [HttpPost]
         public ActionResult Create(SystemInfoAccountUser systemInfoAccountUser)
         {
-            DatabaseRef db = new DatabaseRef();
+            Database db = new Database();
             String managerPassword = "";
             OracleCommand cmd = new OracleCommand();
             String getManagerPassword = "select ManagerPassword from SystemInfo";

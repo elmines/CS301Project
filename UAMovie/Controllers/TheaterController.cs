@@ -19,21 +19,7 @@ namespace UAMovie.Controllers
             }
             return View("~/Views/Theater/DisplaySearchedTheaters.cshtml",theaters);
         }
-
-        public ActionResult Confirmation()
-        {
-            return View();
-        }
         
-        public ActionResult Purchase()
-        {
-            return View();
-        }
-
-        public ActionResult SearchForTheaters()
-        {
-            return View();
-        }
        
         // GET: Theater
         public ActionResult Index()

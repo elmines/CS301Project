@@ -13,7 +13,7 @@ namespace UAMovie.Models
     public AccountUser user { get; set; }
     public void insert()
         {
-        DatabaseRef db = new DatabaseRef();
+        Database db = new Database();
         OracleCommand cmd = new OracleCommand();
         cmd.Connection = db.conn;
         String insertQuery = "INSERT INTO Manager (username) VALUES('" + this.Username + "')";
