@@ -4,7 +4,7 @@
 }
 <h2>Welcome!</h2>
 <h4>Login</h4>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Login","AccountUser",new { user = Model }))
 {
     @Html.LabelFor(model => model.Username);
     @Html.EditorFor(model => model.Username);
