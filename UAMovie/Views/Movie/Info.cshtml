@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Movie m = new Movie();
+    m.Name = "The Rise and Fall of Ben Jones";
+    m.AgeRating = "G";
+    m.ReleaseDate = "August 22, 2016";
+    m.Synopsis = "Benjamin strives to find his way in a world where algorithms aren't all we need for computing.";
+    m.Price = 100.0f;
+    m.Duration = 480;
+    m.Genre = "Romantic Comedy";
+
+    int hours = m.Duration / 60;
+    int minutes = m.Duration % 60;
+    String length = String.Format("{0} hours and {1} minutes", hours, minutes);
+
+    int numRatings = 1000000;
+    float avgRating = 4.9f;
+
+}
+
+<h2>@m.Name</h2>
+<p><em>@m.ReleaseDate</em></p>
+<ul>
+    <li>Rated @m.AgeRating, @m.Genre</li>
+    <li>@length</li>
+    <li>@String.Format("{0:C2}", m.Price)</li>
+    <li>Rated @String.Format("{0:F1}/{1:F1}", avgRating, 5.0) by @numRatings viewers</li>
+</ul>
+
+<ul class="horizontal-list">
+    <li><a asp-area="" asp-action="Overview">Overview</a></li>
+    <li>| <a asp-area="" asp-controller="Review" asp-action="Index">Reviews</a></li>
+    <li>| <a asp-area="" asp-controller="TheaterViewModel" asp-action="SearchForTheaters">Buy Tickets</a></li>
+</ul>

@@ -4,56 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UAMovie.Models;
+
 namespace UAMovie.Controllers
 {
-    public class TheaterController : Controller
+    public class MovieController : Controller
     {
-        [HttpPost]
-        public ActionResult DisplaySearchedTheaters(String name, String city, String state)
-        {
-            List<Theater> theaters = Theater.SearchTheaters(name, city, state);
-            if (theaters.Count == 0)//no theaters found
-            {
-                return RedirectToAction("SearchForTheaters","Theater",new { errorText = "No results found." });
-            }
-            return View("~/Views/Theater/DisplaySearchedTheaters.cshtml",theaters);
-        }
 
-        public ActionResult Confirmation()
-        {
-            return View();
-        }
-        
-        public ActionResult Purchase()
+        public ActionResult Overview()
         {
             return View();
         }
 
-        public ActionResult SearchForTheaters()
+        public ActionResult Movie()
         {
             return View();
         }
-       
-        // GET: Theater
+
+        public ActionResult Info()
+        {
+            return View();
+        }
+
+        // GET: Movie
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Theater/Details/5
+        // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Theater/Create
+        // GET: Movie/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Theater/Create
+        // POST: Movie/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -70,13 +60,13 @@ namespace UAMovie.Controllers
             }
         }
 
-        // GET: Theater/Edit/5
+        // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Theater/Edit/5
+        // POST: Movie/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -93,13 +83,13 @@ namespace UAMovie.Controllers
             }
         }
 
-        // GET: Theater/Delete/5
+        // GET: Movie/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Theater/Delete/5
+        // POST: Movie/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

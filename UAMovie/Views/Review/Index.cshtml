@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Movie m = new Movie();
+    m.Name = "The Rise and Fall of Ben Jones";
+
+    Review[] reviews = new Review[3];
+    for (int i = 0; i < reviews.Length; ++i)
+    {
+        reviews[i] = new Review();
+    }
+
+    reviews[0].Title = "Inspiring";
+    reviews[0].Body = "Ben shows we all are algorithmists.";
+    reviews[0].rating = 4;
+
+    reviews[1].Title = "What a show!";
+    reviews[1].Body = "I loved it so much, but I had to not drink water to make it through the 8 hours.";
+    reviews[1].rating = 3;
+
+    reviews[2].Title = "Rubbish";
+    reviews[2].Body = "Mr. Mines's portrayal of me was super-polynomialy awful.";
+    reviews[2].rating = 0;
+
+    float avgRating = 0.0f;
+    foreach (Review r in reviews)
+    {
+        avgRating += r.rating;
+    }
+    avgRating /= reviews.Length;
+}
+
+<h2>@m.Name</h2>
+<p>Average Rating: @String.Format("{0:F2}", avgRating)</p>
+<p><a href="google.com">Give review</a></p>
+
+@{ 
+    foreach (Review r in reviews)
+    {
+        <div class="review-box">
+            <h3>@r.Title</h3>
+            <p>@String.Format("{0}/{1}", r.rating, 5)</p>
+            <p>@r.Body</p>
+        </div>
+    }
+}
+
+<p>Back to <a asp-area="" asp-controller="Movie" asp-action="Info">info</a></p>
+

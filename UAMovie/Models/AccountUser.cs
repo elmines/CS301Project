@@ -14,8 +14,10 @@ namespace UAMovie.Models
 
         public void insert()
         {
+
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();    
+
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO AccountUser (username,emailaddress,password) VALUES('" + this.Username + "','" + this.EmailAddress + "','" + this.Password + "')";
             cmd.CommandText = insertQuery;

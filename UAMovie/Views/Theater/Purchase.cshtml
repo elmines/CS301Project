@@ -1,0 +1,115 @@
+﻿@model UAMovie.Models.ViewModels.TheaterViewModel;
+
+@{
+    ViewData["Title"] = "Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Theater theater = UAMovie.Models.Theater.testData()[0];
+    Movie movie = UAMovie.Models.Movie.testData()[0];
+    float price = movie.Price;
+    double seniorDiscount = 0.1;
+    double childDiscount = 0.2;
+
+    double childCost = price * (1.0 - childDiscount);
+    double seniorCost = price * (1.0 - seniorDiscount);
+    String adultCostLabel = String.Format("Adult Tickets ({0:C2})", price);
+    String seniorCostLabel = String.Format("Senior Tickets ({0:C2})", seniorCost);
+    String childCostLabel = String.Format("Child Tickets ({0:C2})", childCost);
+
+
+
+    CreditCard[] creditCards = UAMovie.Models.CreditCard.testData();
+    String[] shortNums = new string[creditCards.Length];
+    int i = 0;
+    foreach (CreditCard card in creditCards)
+    {
+        String cardNumber = card.CardNumber;
+        shortNums[i] = "XXXX XXXX XXXX " + cardNumber.Substring(cardNumber.Length - 4);
+        ++i;
+    }
+    SelectList cardNums = new SelectList(shortNums);
+    SelectList showings = new SelectList(new string[] { "Monday, December 3, 8:00 a.m.",
+                                                        "Tuesday, December 4, 2:00 p.m.",
+                                                        "Wednesday, December 5, 11:00 p.m." });
+
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@{
+    <div>
+        <em>@movie.Name</em> (Rated <strong>@movie.AgeRating</strong>, @movie.DurationText)<br />
+        @theater.Name<br/>
+        @theater.StreetNumber @theater.Street<br/>
+        @theater.City, @theater.State @theater.Zip
+        
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    <script>
+        var updateCost = function () {
+            var adultTickets = parseInt(document.getElementById("adultTickets").value, 10);
+            var childTickets = parseInt(document.getElementById("childTickets").value, 10);
+            var seniorTickets = parseInt(document.getElementById("seniorTickets").value, 10);
+
+            if (isNaN(adultTickets)) adultTickets = 0;
+            if (isNaN(childTickets)) childTickets = 0;
+            if (isNaN(seniorTickets)) seniorTickets = 0;
+
+
+            var cost = @price* adultTickets + @childCost* childTickets + @seniorCost* seniorTickets;
+
+
+            var formmatedCost = cost.toLocaleString("en-US", { style: "currency", currency: "USD" });
+            document.getElementById("cost").textContent = "Cost: " + formmatedCost;
+        };
+
+    </script>
+
+    <p class="form-row">
+        @Html.Label("Showing")
+        @Html.DropDownListFor(model => model.theater.ID, showings, "Choose Showing")
+
+        <label>@adultCostLabel</label>
+        <input type="number" value="0" min="0" max="999" id="adultTickets" oninput="updateCost()"/>
+
+        <label>@childCostLabel</label>
+        <input type="number" value="0" min="0" max="999" id="childTickets" oninput="updateCost()"/>
+
+        <label>@seniorCostLabel</label>
+        <input type="number" value="0" min="0" max="999" id="seniorTickets" oninput="updateCost()"/>
+    </p>
+    <p id="cost">Cost: $0.00</p>
+
+    <h3>Pay with Saved Card</h3>
+    <p class="form-row">
+        @Html.DropDownListFor(model => model.theater.ID, cardNums, "Choose Credit Card")
+    </p>
+    <button type="submit">Pay</button>
+
+
+    <h3>Pay with New Card</h3>
+
+    <p class="form-row">
+        <label>Name on Card</label>
+        @Html.EditorFor(model => model.theater.Name)
+
+        <label>Card Number</label>
+        @Html.EditorFor(model => model.theater.ID)
+
+        <label>CVV</label>
+        @Html.EditorFor(model => model.theater.ID)
+
+        <label>Expiration Date</label>
+        <input type="month" />
+
+        <label>Save Card</label>
+        @Html.CheckBox("saved", true)
+    </p>
+
+    <button type="submit">Pay</button>
+
+}
+

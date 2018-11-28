@@ -15,6 +15,21 @@ table, th, td {
     border: 1px solid black;
 }
 
+.horizontal-list li{
+    display: inline;
+}
+
+.review-box{
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+}
+
+.form-row > input, .form-row > select, .form-row > button{
+    margin-right: 10px;
+}
+
+
 
 @media screen and (max-width: 767px) {
     /* Hide captions */

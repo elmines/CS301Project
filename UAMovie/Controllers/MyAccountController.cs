@@ -32,5 +32,10 @@ namespace UAMovie.Controllers
         {
             return View();
         }
+
+        public IActionResult OrderDetail()
+        {
+            return View();
+        }
     }
 }

@@ -4,5 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SearchForTheaters</h2>
+<h2>Select Theater</h2>
 
+@{ 
+    String[] theaterNames = { "AMC Overpriced Chairs Theater", "AAFES Totally Old Movies", "Regal Premiere"};
+    SelectList selections = new SelectList(theaterNames);
+}
+
+    
+
+@using (Html.BeginForm("Read", "Theater", FormMethod.Post, new { theaterViewModel = Model }))
+{
+    @Html.LabelFor(model => model.theater.Name);
+    @Html.DropDownListFor(model => model.theater.Name, selections, "Preferred Theater");
+    <button type="button">Select</button>
+    <br/>
+
+    @Html.Label("Search City/State/Theater")
+    @Html.EditorFor(model => model.theater.Name)
+    <button type="button">Search</button>
+
+}

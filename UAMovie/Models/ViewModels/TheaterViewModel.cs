@@ -17,7 +17,7 @@ namespace UAMovie.Models.ViewModels
         public void GetPreferredTheaters()// puts the preffered theaters in the list.
         {
             //establish connection
-            Database db = new Database();
+            DatabaseRef db = new DatabaseRef();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
 
@@ -25,7 +25,7 @@ namespace UAMovie.Models.ViewModels
             //TODO: CHANGE THE QUERY TO JOIN ON PREFERREDTHEATERS
 
             //establish query
-            String readQuery = "SELECT * FROM Theaters";
+            String readQuery = "SELECT * FROM Theater";
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
 
