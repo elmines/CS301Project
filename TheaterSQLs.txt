@@ -1,0 +1,32 @@
+—Delete preferred theater
+Delete from PrefferedTheater where theaterID = $var_id and username = $name;
+
+
+—View Preferred Theaters
+select name, state, city, streetnumber, street 
+from theater, PreferredTheater
+where preferredtheater.theaterid = theater.id and preferredtheater.username = $username;
+
+
+—search theaters
+select *
+from theater
+where theater.name like ‘%$query%’ or theater.city like ‘%$query%’ or theater.state = ‘%$query%’;
+
+
+—save theater
+insert into preferredtheater
+values ($id, $username);
+
+
+—view movie times
+select name, starttime
+from showing right join movie on showing.moviename = movie.name
+where movie.name = '$movieName'
+order by movie.name;
+
+— get prices
+select price
+from movie
+where movie.name = ‘$movieName’
+
