@@ -13,11 +13,11 @@ namespace UAMovie.Models
         public String CVV { get; set; }
         public String Holder { get; set; }
         public String ExpirationDate { get; set; }
-        public Boolean Saved { get; set; }
+        public int Saved { get; set; }
 
         public void insert()
         {
-            Database db = new Database();
+            DatabaseRef db = new DatabaseRef();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('" + this.CardNumber + this.UserName + this.CVV + this.Holder + this.ExpirationDate + "'" + this.Saved + "')";

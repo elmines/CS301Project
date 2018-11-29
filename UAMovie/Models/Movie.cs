@@ -14,5 +14,6 @@ namespace UAMovie.Models
         public float Price { get; set; }
         public int Duraction { get; set; }
         public String Genre { get; set; }
+        public int NowPlaying { get; set; }
     }
 }

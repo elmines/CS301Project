@@ -47,7 +47,7 @@ create table CreditCard (
 create table Movie (
         Name        varchar(255)  primary key,
         AgeRating   varchar(255),
-        ReleaseDate Date,
+        ReleaseDate varchar(255),
         Synopsis    varchar(255),
         Price       float         not null check(Price >= 0),
         Duration    int           not null check(Duration > 0),
