@@ -14,6 +14,8 @@ namespace UAMovie.Controllers.ViewModelControllers
         public ActionResult GetNowPlaying(AccountUser user)
         {
             MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
+            movieAccountUserViewModel.movies = new List<Movie>(); //Stupid manual instantiation of List
+
             movieAccountUserViewModel.user = user;
             movieAccountUserViewModel.GetNowPlaying();
             return View("~/Views/MyAccount/NowPlaying.cshtml", movieAccountUserViewModel);
