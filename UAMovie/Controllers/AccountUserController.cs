@@ -39,7 +39,7 @@ namespace UAMovie.Controllers
             }
             else//user is customer
             {
-                return RedirectToAction("Me", "Customer", new { user = user });
+                return RedirectToAction("NowPlaying", "Customer", new { user = user });
             }
         }
     }
