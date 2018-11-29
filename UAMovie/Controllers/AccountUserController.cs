@@ -24,6 +24,11 @@ namespace UAMovie.Controllers
         {
             return View(user);
         }
+
+        public ActionResult LoginForm()
+        {
+            return View("~/Views/Home/Index.cshtml");
+        }
         
         public ActionResult Login(AccountUser user)
         {
