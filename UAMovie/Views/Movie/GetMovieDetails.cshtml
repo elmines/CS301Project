@@ -21,9 +21,10 @@
 
     float avgRating = 4.9f;
     int numRatings = 1000000000;
+
 }
 
-<h2>@Model.movie.Name</h2>
+<h2>@ViewData["Title"]</h2>
 <p><em>@Html.DisplayFor(model => model.movie.ReleaseDate)</em></p>
 <ul>
     <li>Rated <strong>@Html.DisplayFor(model => model.movie.AgeRating)</strong>, @Html.DisplayFor(model => model.movie.Genre)</li>
@@ -31,5 +32,17 @@
     <li>Rated @String.Format("{0:F1}/{1:F1}", avgRating, 5.0) by @String.Format("{0:n0}", numRatings) viewers</li>
 </ul>
 
-<p>@Html.ActionLink("Learn more", "GetMovieDetails", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })</p>
-<p>@Html.ActionLink("Back to Now Playing", "GetNowPlaying", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model })</p>
+<p>@Html.DisplayFor(model => model.movie.Synopsis)</p>
+
+<table>
+    <thead><tr><td><strong>Actor</strong></td><td><strong>Role</strong></td></tr></thead>
+
+    @{ 
+        foreach (Cast castMember in Model.cast)
+        {
+            <tr><td>@castMember.Actor</td><td>@castMember.Character</td></tr>
+        }
+    }
+</table>
+
+<p>@Html.ActionLink("Go back", "GetMovie", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })</p>

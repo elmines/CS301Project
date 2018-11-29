@@ -12,7 +12,9 @@ namespace UAMovie.Models.ViewModels
     {
         public AccountUser user { get; set; }
         public List<Movie> movies { get; set; }
+
         public Movie movie { get; set; }
+        public List<Cast> cast { get; set; }
         public void GetNowPlaying()
         {
             //establish connection
@@ -35,6 +37,25 @@ namespace UAMovie.Models.ViewModels
                 movies.Add(tempMovie);
             }
 
+            cmd.Dispose();
+            db.Dispose();
+        }
+
+        public void GetCast()
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            String readQuery = String.Format("SELECT Actor, Character FROM Cast WHERE MovieName=\'{0}\'", movie.Name);
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Cast tempCast = new Cast();
+                tempCast.Actor = reader.GetString(0);
+                tempCast.Character = reader.GetString(1);
+                cast.Add(tempCast);
+            }
             cmd.Dispose();
             db.Dispose();
         }

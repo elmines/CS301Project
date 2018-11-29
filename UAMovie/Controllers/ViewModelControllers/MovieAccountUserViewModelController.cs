@@ -25,6 +25,14 @@ namespace UAMovie.Controllers.ViewModelControllers
             movieAccountUserViewModel.movie = Movie.Get(movieName);
             return View("~/Views/Movie/GetMovie.cshtml", movieAccountUserViewModel);
         }
+
+        public ActionResult GetMovieDetails(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        {
+            movieAccountUserViewModel.movie = Movie.Get(movieName);
+            movieAccountUserViewModel.cast = new List<Cast>(); //Stupid manual instantiation of list
+            movieAccountUserViewModel.GetCast();
+            return View("~/Views/Movie/GetMovieDetails.cshtml", movieAccountUserViewModel);
+        }
         // GET: MovieAccountUserViewModel
         public ActionResult Index()
         {
