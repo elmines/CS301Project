@@ -31,7 +31,7 @@ namespace UAMovie.Models
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
-            String loginQuery = "Select Username, Password from AccountUser where (Username = "+this.Username+"  AND Password = "+this.Password+")";
+            String loginQuery = "Select Username, Password from AccountUser where (Username = '"+this.Username+"'  AND Password = '"+this.Password+"')";
             cmd.CommandText = loginQuery;
             OracleDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -46,7 +46,7 @@ namespace UAMovie.Models
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
-            String loginQuery = "Select Username from Manager where (Username = " + this.Username + ")";
+            String loginQuery = "Select Username from Manager where (Username = '" + this.Username + "')";
             cmd.CommandText = loginQuery;
             OracleDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)

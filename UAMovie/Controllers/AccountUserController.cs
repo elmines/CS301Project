@@ -24,15 +24,16 @@ namespace UAMovie.Controllers
         {
             return View(user);
         }
+        [HttpPost]
         public ActionResult Login(AccountUser user)
         {
             if (user.isManager())
             {
-                return RedirectToAction("Manager", "Index", new { user = user });
+                return RedirectToAction("Index", "Manager", new { user = user });
             }
             else//user is customer
             {
-                return RedirectToAction("Customer", "Me", new { user = user });
+                return RedirectToAction("Me", "Customer", new { user = user });
             }
         }
     }
