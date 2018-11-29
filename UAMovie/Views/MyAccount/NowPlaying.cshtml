@@ -7,11 +7,12 @@
 <h2>Now Playing</h2>
 <table>
     @{
-        String[] movies = { "Detective Pikachu", "Venom", "The Grinch" };
+        //String[] movies = { "Detective Pikachu", "Venom", "The Grinch" };
         <tr><th>Title</th></tr>
-        foreach (String movie in movies)
+
+        foreach (Movie movie in Model.movies)
         {
-            {<tr><td>@movie</td></tr>}
+            {<tr><td>@movie.Name</td></tr>}
         }
     }
 </table>
