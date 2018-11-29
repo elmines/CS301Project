@@ -12,7 +12,7 @@ namespace UAMovie.Models.ViewModels
     {
         public AccountUser user { get; set; }
         public List<Movie> movies { get; set; }
-
+        public Movie movie { get; set; }
         public void GetNowPlaying()
         {
             //establish connection
