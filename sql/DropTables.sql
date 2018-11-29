@@ -1,0 +1,12 @@
+drop table Theater cascade constraints;
+drop table AccountUser cascade constraints;
+drop table Manager cascade constraints;
+drop table Customer cascade constraints;
+drop table PreferredTheater cascade constraints;
+drop table CreditCard cascade constraints;
+drop table Movie cascade constraints;
+drop table Showing cascade constraints;
+drop table Review cascade constraints;
+drop table Cast cascade constraints;
+drop table TicketOrder cascade constraints;
+drop table SystemInfo cascade constraints;

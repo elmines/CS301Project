@@ -38,8 +38,8 @@ create table CreditCard (
         Username       varchar(255) references Customer(Username),
         CVV            char(3)      not null,
         Holder         varchar(255) not null,
-        ExpirationDate varchar(255) not null,
-        Saved          int not null,                       --0, everything else is true
+        ExpirationDate varchar(255) not null,              --0, everything else is true
+        Saved          int not null,
         primary key (CardNumber, UserName)
 );
 
@@ -47,11 +47,12 @@ create table CreditCard (
 create table Movie (
         Name        varchar(255)  primary key,
         AgeRating   varchar(255),
-        ReleaseDate varchar(255),
+        ReleaseDate Date,
         Synopsis    varchar(255),
         Price       float         not null check(Price >= 0),
         Duration    int           not null check(Duration > 0),
-        Genre       varchar(255)
+        Genre       varchar(255),
+        NowShowing  int           --0 indicates not showing, 1 indicates showing
 );
 
 
@@ -84,7 +85,7 @@ create table Cast (
 create table TicketOrder (
         ID            varchar(255)  primary key,
         ShowingID     varchar(255)  references Showing(ID),
-        Username      varchar(255),
+        Username      varchar(255)  references Customer(Username),
         CardNumber    char(16),
         Cost          float         not null check(Cost >= 0),
         ChildTickets  int           not null check(ChildTickets >= 0),
