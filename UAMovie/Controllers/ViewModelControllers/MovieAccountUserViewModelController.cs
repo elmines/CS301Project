@@ -20,6 +20,11 @@ namespace UAMovie.Controllers.ViewModelControllers
             movieAccountUserViewModel.GetNowPlaying();
             return View("~/Views/MyAccount/NowPlaying.cshtml", movieAccountUserViewModel);
         }
+        public ActionResult GetMovie(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        {
+            movieAccountUserViewModel.movie = Movie.Get(movieName);
+            return View("~/Views/Movie/GetMovie.cshtml", movieAccountUserViewModel);
+        }
         // GET: MovieAccountUserViewModel
         public ActionResult Index()
         {
