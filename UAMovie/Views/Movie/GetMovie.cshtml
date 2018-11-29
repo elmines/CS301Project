@@ -1,68 +1,41 @@
 ﻿@model UAMovie.Models.ViewModels.MovieAccountUserViewModel
-
 @{
-    ViewData["Title"] = "GetMovie";
+    ViewData["Title"] = Model.movie.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.HiddenFor(model => model.user.Username)
 @Html.HiddenFor(model => model.user.EmailAddress)
-<h2>GetMovie</h2>
 
-<div>
-    <h4>Movie</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.AgeRating)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.AgeRating)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.ReleaseDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.ReleaseDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.Synopsis)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.Synopsis)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.Duration)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.Duration)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.Genre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.Genre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.movie.NowPlaying)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.movie.NowPlaying)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+@{ 
+    int hours = Model.movie.Duration / 60;
+    int minutes = Model.movie.Duration % 60;
+    String length;
+    if (minutes > 0)
+    {
+        length = String.Format("{0} hours and {1} minutes", hours, minutes);
+    }
+    else
+    {
+        length = String.Format("{0} hours", hours);
+    }
+
+    float avgRating = 4.9f;
+    int numRatings = 1000000000;
+}
+
+<h2>@Model.movie.Name</h2>
+<p><em>@Html.DisplayFor(model => model.movie.ReleaseDate)</em></p>
+<ul>
+    <li>Rated <strong>@Html.DisplayFor(model => model.movie.AgeRating)</strong>, @Html.DisplayFor(model => model.movie.Genre)</li>
+    <li>@length</li>
+    <li>Rated @String.Format("{0:F1}/{1:F1}", avgRating, 5.0) by @String.Format("{0:n0}", numRatings) viewers</li>
+</ul>
+
+
+<!--
+<ul>
+    <li>Rated m.AgeRating, m.Genre</li>
+    <li>length</li>
+    <li>String.Format("{0:C2}", m.Price)</li>
+</ul>
+-->
