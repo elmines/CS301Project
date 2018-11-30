@@ -11,6 +11,21 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class MovieAccountUserViewModelController : Controller
     {
+        public ActionResult WriteReview(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        {
+            movieAccountUserViewModel.movie = Movie.Get(movieName);
+            movieAccountUserViewModel.newReview = new Review();
+            return View("~/Views/Movie/Reviews.cshtml", movieAccountUserViewModel);
+        }
+
+        public ActionResult GetReviews(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        {
+            movieAccountUserViewModel.movie = Movie.Get(movieName);
+            movieAccountUserViewModel.reviews = new List<Review>();
+            movieAccountUserViewModel.GetReviews();
+            return View("~/Views/Movie/Reviews.cshtml", movieAccountUserViewModel);
+        }
+
         public ActionResult GetNowPlaying(AccountUser user)
         {
             MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();

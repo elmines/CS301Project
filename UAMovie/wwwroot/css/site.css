@@ -5,6 +5,16 @@ body {
     font-family: Comic Sans MS, sans-serif;
 }
 
+ul.horizontal-list > li{
+    display: inline;
+}
+
+.review-box {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+}
+
 .body-content {
     background-color: #eeeeee;
     padding: 10px;

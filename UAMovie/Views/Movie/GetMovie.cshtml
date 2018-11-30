@@ -21,6 +21,12 @@
 
     float avgRating = 4.9f;
     int numRatings = 1000000000;
+
+    AccountUser user = Model.user;
+    Console.WriteLine(Model.user.Username);
+    Movie movie = Model.movie;
+    Console.WriteLine(Model.movie.Name);
+    Boolean hasWatched = UAMovie.Controllers.ReviewController.hasWatched(user, movie.Name);
 }
 
 <h2>@Model.movie.Name</h2>
@@ -31,5 +37,24 @@
     <li>Rated @String.Format("{0:F1}/{1:F1}", avgRating, 5.0) by @String.Format("{0:n0}", numRatings) viewers</li>
 </ul>
 
-<p>@Html.ActionLink("Learn more", "GetMovieDetails", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })</p>
+
+<ul class="horizontal-list">
+    <li>
+        @Html.ActionLink("Learn more", "GetMovieDetails", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })
+    </li>
+    <li>
+        | @Html.ActionLink("Reviews", "GetReviews", "MovieAccountUserViewModel", new { movieAccounterUserViewModel = Model, movieName = Model.movie.Name })
+    </li>
+
+    @{
+        if (hasWatched)
+        {
+            <li>
+                | @Html.ActionLink("Write Review", "WriteReview", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })
+            </li>
+        }
+    }
+</ul>
+
+
 <p>@Html.ActionLink("Back to Now Playing", "GetNowPlaying", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model })</p>

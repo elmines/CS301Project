@@ -1,0 +1,31 @@
+﻿@model UAMovie.Models.ViewModels.MovieAccountUserViewModel;
+@{
+    ViewData["Title"] = Model.movie.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    double average = 0.0;
+    foreach (Review r in Model.reviews)
+    {
+        average += r.rating;
+    }
+    average /= Model.reviews.Count;
+
+}
+@Html.HiddenFor(model => model.user.Username)
+@Html.HiddenFor(model => model.user.EmailAddress)
+
+<h2>@ViewData["Title"]</h2>
+
+
+<p>Average Rating: @String.Format("{0:N2}/5", average), Back to @Html.ActionLink("overview", "GetMovie", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })</p>
+
+@{
+    foreach (Review r in Model.reviews)
+    {
+        <div class="review-box">
+            <h3>@r.Title</h3>
+            <p>@String.Format("{0}/{1}", r.rating, 5)</p>
+            <p>@r.Body</p>
+        </div>
+    }
+}
