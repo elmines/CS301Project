@@ -20,7 +20,13 @@ namespace UAMovie.Models
             String insertQuery = "INSERT INTO AccountUser (username,emailaddress,password) VALUES('" + this.Username + "','" + this.EmailAddress + "','" + this.Password + "')";
             cmd.CommandText = insertQuery;
 
+            try {
             cmd.ExecuteNonQuery();
+            }
+            catch 
+            {
+                
+            }
 
             
             cmd.Dispose();

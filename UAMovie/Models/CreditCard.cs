@@ -22,7 +22,13 @@ namespace UAMovie.Models
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('" + this.CardNumber + this.UserName + this.CVV + this.Holder + this.ExpirationDate + "'" + this.Saved + "')";
             cmd.CommandText = insertQuery;
-            cmd.ExecuteNonQuery();
+            try {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
             cmd.Dispose();
             db.Dispose();
         }

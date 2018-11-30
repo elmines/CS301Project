@@ -18,7 +18,14 @@ namespace UAMovie.Models
         cmd.Connection = db.conn;
         String insertQuery = "INSERT INTO Manager (username) VALUES('" + this.Username + "')";
         cmd.CommandText = insertQuery;
-        cmd.ExecuteNonQuery();
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch
+        {
+            
+        }
         cmd.Dispose();
         db.Dispose();
         }

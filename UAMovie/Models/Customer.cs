@@ -25,7 +25,12 @@ namespace UAMovie.Models
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO Customer (username) VALUES('" + this.username + "')";
             cmd.CommandText = insertQuery;
-            cmd.ExecuteNonQuery();
+            try {
+                cmd.ExecuteNonQuery();
+            }
+            catch 
+            {
+            }
             cmd.Dispose();
             db.Dispose();
         }
