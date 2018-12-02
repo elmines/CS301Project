@@ -26,12 +26,13 @@ namespace UAMovie.Controllers.ViewModelControllers
             return View("~/Views/Movie/Reviews.cshtml", movieAccountUserViewModel);
         }
 
-        public ActionResult GetNowPlaying(AccountUser user)
+        public ActionResult GetNowPlaying(String username)
         {
             MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
             movieAccountUserViewModel.movies = new List<Movie>(); //Stupid manual instantiation of List
 
-            movieAccountUserViewModel.user = user;
+            movieAccountUserViewModel.user = new AccountUser();
+            movieAccountUserViewModel.user.Username = username;
             movieAccountUserViewModel.GetNowPlaying();
             return View("~/Views/MyAccount/NowPlaying.cshtml", movieAccountUserViewModel);
         }

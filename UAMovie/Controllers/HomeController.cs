@@ -19,7 +19,7 @@ namespace UAMovie.Controllers
         {
             if(user.login())
             {
-                return RedirectToAction("Login", "Accountuser", new {user = user });
+                return RedirectToAction("Login", "Accountuser", new {username = user.Username });
             }
             //Error message?
             return View();

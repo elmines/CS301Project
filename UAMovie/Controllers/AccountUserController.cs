@@ -30,16 +30,17 @@ namespace UAMovie.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
         
-        public ActionResult Login(AccountUser user)
+        public ActionResult Login(String username)
         {
-            
+            AccountUser user = new AccountUser();
+            user.Username = username;
             if (user.isManager())
             {
-                return RedirectToAction("Index", "Manager", new { user = user });
+                return RedirectToAction("Index", "Manager", new { username = user.Username });
             }
             else//user is customer
             {
-                return RedirectToAction("NowPlaying", "Customer", new { user = user });
+                return RedirectToAction("NowPlaying", "Customer", new { username = user.Username });
             }
         }
     }
