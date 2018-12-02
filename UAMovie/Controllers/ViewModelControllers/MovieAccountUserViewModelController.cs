@@ -11,11 +11,15 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class MovieAccountUserViewModelController : Controller
     {
-        public ActionResult WriteReview(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        public ActionResult WriteReview(String userName, String movieName)
         {
+
+            MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
+            movieAccountUserViewModel.user = new AccountUser();
+            movieAccountUserViewModel.user.Username = userName;
             movieAccountUserViewModel.movie = Movie.Get(movieName);
             movieAccountUserViewModel.newReview = new Review();
-            return View("~/Views/Movie/Reviews.cshtml", movieAccountUserViewModel);
+            return View("~/Views/Movie/WriteReview.cshtml", movieAccountUserViewModel);
         }
 
         public ActionResult GetReviews(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
@@ -36,8 +40,11 @@ namespace UAMovie.Controllers.ViewModelControllers
             movieAccountUserViewModel.GetNowPlaying();
             return View("~/Views/MyAccount/NowPlaying.cshtml", movieAccountUserViewModel);
         }
-        public ActionResult GetMovie(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        public ActionResult GetMovie(String userName, String movieName)
         {
+            MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
+            movieAccountUserViewModel.user = new AccountUser(); //Stupid manual instantiation of user
+            movieAccountUserViewModel.user.Username = userName;
             movieAccountUserViewModel.movie = Movie.Get(movieName);
             return View("~/Views/Movie/GetMovie.cshtml", movieAccountUserViewModel);
         }

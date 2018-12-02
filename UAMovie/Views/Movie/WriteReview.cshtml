@@ -10,6 +10,12 @@
 <!--TODO: Give a correct form header-->
 @using (Html.BeginForm("Create", "Review", FormMethod.Post, new { review = Model }))
 {
+    @Html.HiddenFor(model => model.user.Username);
+    @Html.HiddenFor(model => model.movie.Name);
+    <!--TODO: make the review ID be automatically determined by the database-->
+    @Html.LabelFor(model => model.newReview.ID);
+    @Html.EditorFor(model => model.newReview.ID);
+
     @Html.LabelFor(model => model.newReview.rating);
     @Html.DropDownListFor(model => model.newReview.rating, new SelectList(Enumerable.Range(1, 6)), "Select Rating");
 
@@ -19,6 +25,7 @@
 
     @Html.LabelFor(model => model.newReview.Body);
     @Html.TextAreaFor(model => model.newReview.Body);
+    <input type="submit" value="Create" class="btn btn-default" />
 }
 
-<input type="submit" value="Create" class="btn btn-default" />
+

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using UAMovie.Models;
+using UAMovie.Models.ViewModels;
 using Oracle.ManagedDataAccess.Client;
 
 namespace UAMovie.Controllers
@@ -15,7 +16,21 @@ namespace UAMovie.Controllers
         {
             return View();
         }
-
+        public ActionResult Create(MovieAccountUserViewModel movieAccountUserViewModel)
+        {
+            movieAccountUserViewModel.newReview.Username = movieAccountUserViewModel.user.Username;
+            movieAccountUserViewModel.newReview.MovieName = movieAccountUserViewModel.movie.Name;
+            try
+            {
+                movieAccountUserViewModel.newReview.insert();
+                return RedirectToAction("NowPlaying","Customer",new { username = movieAccountUserViewModel.user.Username });
+            }
+            catch
+            {
+                //error message???
+                return View("~/Views/Movie/WriteReview.cshtml",movieAccountUserViewModel);
+            }
+        }
         public static Boolean hasWatched(AccountUser user, String movieName)
         {
             Database db = new Database();

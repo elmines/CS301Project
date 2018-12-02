@@ -8,10 +8,10 @@
 <table>
     @{
         <tr><th>Title</th></tr>
-
+        @Html.HiddenFor(model => model.user.Username);
         foreach (Movie movie in Model.movies)
         {
-            {<tr><td>@Html.ActionLink(movie.Name,"GetMovie","MovieAccountUserViewModel",new { movieAccountUserViewModel = Model, movieName = movie.Name })</td></tr>}
+            {<tr><td>@Html.ActionLink(movie.Name,"GetMovie","MovieAccountUserViewModel",new { userName = Model.user.Username, movieName = movie.Name })</td></tr>}
 
         }
     }

@@ -47,7 +47,7 @@
         if (hasWatched)
         {
             <li>
-                | @Html.ActionLink("Write Review", "WriteReview", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })
+                | @Html.ActionLink("Write Review", "WriteReview", "MovieAccountUserViewModel", new { userName = Model.user.Username, movieName = Model.movie.Name })
             </li>
         }
     }
