@@ -1,0 +1,68 @@
+﻿@model UAMovie.Models.ViewModels.MovieAccountUserViewModel
+
+@{
+    ViewData["Title"] = "GetMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.HiddenFor(model => model.user.Username)
+@Html.HiddenFor(model => model.user.EmailAddress)
+<h2>GetMovie</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.AgeRating)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.AgeRating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.ReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.ReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.Synopsis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.Synopsis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.Duration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.Duration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.Genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.Genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movie.NowPlaying)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.movie.NowPlaying)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
