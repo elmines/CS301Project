@@ -12,7 +12,9 @@ namespace UAMovie.Models.ViewModels
         public Customer customer { get; set; }
         public Theater theater { get; set; }
         public List<Theater> preferredTheaters { get; set; }
+        public List<Theater> foundTheaters { get; set; }
         public String errorText { get; set; }
+        public String searchName { get; set; }
 
         public void GetPreferredTheaters()// puts the preffered theaters in the list.
         {
@@ -20,12 +22,12 @@ namespace UAMovie.Models.ViewModels
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
-
+            preferredTheaters = new List<Theater>();
 
             //TODO: CHANGE THE QUERY TO JOIN ON PREFERREDTHEATERS
 
             //establish query
-            String readQuery = "SELECT * FROM Theaters";
+            String readQuery = "SELECT * FROM Theater";
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
 

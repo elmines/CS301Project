@@ -37,10 +37,13 @@
 
 <ul class="horizontal-list">
     <li>
-        @Html.ActionLink("Learn more", "GetMovieDetails", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })
+        @Html.ActionLink("Buy Ticket", "SearchForTheaters", "TheaterViewModel", new { userName = Model.user.Username, movieName = Model.movie.Name })
     </li>
     <li>
-        | @Html.ActionLink("Reviews", "GetReviews", "MovieAccountUserViewModel", new { movieAccounterUserViewModel = Model, movieName = Model.movie.Name })
+        @Html.ActionLink("Learn more", "GetMovieDetails", "MovieAccountUserViewModel", new { userName = Model.user.Username, movieName = Model.movie.Name })
+    </li>
+    <li>
+        | @Html.ActionLink("Reviews", "GetReviews", "MovieAccountUserViewModel", new { userName = Model.user.Username, movieName = Model.movie.Name })
     </li>
 
     @{
@@ -54,4 +57,4 @@
 </ul>
 
 
-<p>@Html.ActionLink("Back to Now Playing", "GetNowPlaying", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model })</p>
+<p>@Html.ActionLink("Back to Now Playing", "GetNowPlaying", "MovieAccountUserViewModel", new { userName = Model.user.Username })</p>

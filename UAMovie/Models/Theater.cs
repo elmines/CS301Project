@@ -17,7 +17,7 @@ namespace UAMovie.Models
         public String Street { get; set; }
         public String Zip { get; set; }
 
-        public static List<Theater> SearchTheaters(String name, String city, String state)
+        public static List<Theater> SearchTheaters(String searchName)
         {
             Database db = new Database();
            
@@ -25,7 +25,7 @@ namespace UAMovie.Models
             cmd.Connection = db.conn;
             //does this handle nulls? TO be determined...
             //does this handle nulls? TO be determined...
-            String readQuery = "SELECT * FROM Theaters WHERE name=" + name + " OR city=" + city + " OR state=" + state;
+            String readQuery = String.Format("select * from theater where theater.name like '%{0}%' or theater.city like '%{0}%' or theater.state = '%{0}%'",searchName);
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
 

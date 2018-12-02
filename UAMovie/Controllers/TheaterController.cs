@@ -9,16 +9,16 @@ namespace UAMovie.Controllers
 {
     public class TheaterController : Controller
     {
-        [HttpPost]
-        public ActionResult DisplaySearchedTheaters(String name, String city, String state)
-        {
-            List<Theater> theaters = Theater.SearchTheaters(name, city, state);
-            if (theaters.Count == 0)//no theaters found
-            {
-                return RedirectToAction("SearchForTheaters","Theater",new { errorText = "No results found." });
-            }
-            return View("~/Views/Theater/DisplaySearchedTheaters.cshtml",theaters);
-        }
+        //[HttpPost]
+        //public ActionResult DisplaySearchedTheaters(String name, String city, String state, String userName)
+        //{
+        //    List<Theater> theaters = Theater.SearchTheaters(name, city, state);
+        //    if (theaters.Count == 0)//no theaters found
+        //    {
+        //        return RedirectToAction("SearchForTheaters","Theater",new { errorText = "No results found." });
+        //    }
+        //    return View("~/Views/Theater/DisplaySearchedTheaters.cshtml",theaters);
+        //}
         
        
         // GET: Theater

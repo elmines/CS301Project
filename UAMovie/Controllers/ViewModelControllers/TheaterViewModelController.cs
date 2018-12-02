@@ -10,10 +10,28 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class TheaterViewModelController : Controller
     {
-        public ActionResult SearchForTheaters(TheaterViewModel theaterViewModel, String errorText)//The asterisk in String* allows errorText to be null
+        public ActionResult SearchForTheaters(String userName, String movieName,String errorText)//The asterisk in String* allows errorText to be null
         {
+            TheaterViewModel theaterViewModel = new TheaterViewModel();
+            theaterViewModel.customer = new Customer();
+            theaterViewModel.customer.username = userName;
             theaterViewModel.GetPreferredTheaters();
             return View("~/Views/Theater/SearchForTheaters.cshtml",theaterViewModel);
+        }
+        [HttpPost]
+        public ActionResult DisplaySearchedTheaters(String searchName, String userName)
+        {
+            TheaterViewModel theaterViewModel = new TheaterViewModel();
+            theaterViewModel.customer = new Customer();
+            theaterViewModel.customer.username = userName;
+            
+
+            theaterViewModel.foundTheaters = Theater.SearchTheaters(searchName);
+            if (theaterViewModel.foundTheaters.Count == 0)//no theaters found
+            {
+                return RedirectToAction("SearchForTheaters", "Theater", new { errorText = "No results found." });
+            }
+            return View("~/Views/Theater/DisplaySearchedTheaters.cshtml", theaterViewModel);
         }
         public ActionResult GetPreferredTheaters(String username)
         {
