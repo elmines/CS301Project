@@ -1,5 +1,5 @@
 insert into AccountUser values ('aepayne3', 'aepayne3@crimson.ua.edu', 'Password');
-insert into AccountUser values ('bdjones13', 'bdjones13@crimson.ua.edu', 'Password1');
+insert into AccountUser values ('bdjones13', 'bdjones13@crimson.ua.edu', 'password');
 insert into AccountUser values ('pajones', 'pajones@crimson.ua.edu', 'Password2');
 insert into AccountUser values ('elmines', 'elmines@crimson.ua.edu', 'Password3');
 insert into AccountUser values ('svrbsky', 'svrbsky@crimson.ua.edu', 'BetterPassword');
