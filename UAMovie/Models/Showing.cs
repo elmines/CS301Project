@@ -31,10 +31,15 @@ namespace UAMovie.Models
                 tempShowing.ID = reader.GetString(2);
                 showings.Add(tempShowing);
             }
-            
+            List<Showing> validShowings = new List<Showing>();
+            foreach (Showing showing in showings)
+            {
+                if (!((showing.StartTime > DateTime.Now.AddDays(7)) || (showing.StartTime <  DateTime.Now)))
+                    validShowings.Add(showing);
+            }
             cmd.Dispose();
             db.Dispose();
-            return showings;
+            return validShowings;
         }
     }
     
