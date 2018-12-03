@@ -62,7 +62,11 @@ nameCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE"+" Username
 cmd.CommandText = "select ManagerPassword from SystemInfo";
           
 //ManagerController.cs
- cmd.CommandText = "SELECT EXTRACT(month from StartTime) AS ShowingMonth, s.MovieName, COUNT(*) AS OrderCount" +
+md.CommandText = "SELECT " +
+                " EXTRACT(month from StartTime) AS ShowingMonth, AdultTickets, ChildTickets, SeniorTickets, MovieName" +
+                " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID=s.ID" +
+                "                    INNER JOIN Movie m   ON s.MovieName=m.Name";
+cmd.CommandText = "SELECT EXTRACT(month from StartTime) AS ShowingMonth, s.MovieName, COUNT(*) AS OrderCount" +
                 " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID = s.ID" +
                 " GROUP BY EXTRACT(month from StartTime), s.MovieName" +
                 " ORDER BY ShowingMonth";
