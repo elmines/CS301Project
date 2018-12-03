@@ -1,20 +1,36 @@
-﻿@model UAMovie.Models.Theater;
+﻿@model UAMovie.Models.ViewModels.TheaterViewModel;
 @{
     ViewData["Title"] = "My Preferred Theaters";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@ViewData["Title"]</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Select</td>
+            <td>Name</td>
+            <td>Adresss</td>
+        </tr>
+    </thead>
+
     @{
-        Theater[] theaters = Theater.testData();
-        foreach (Theater t in theaters)
+        List<Theater> theaters = Model.preferredTheaters;
+        foreach (Theater th in theaters)
         {
-            <div>
-                @Html.RadioButtonFor(model => model.ID, t.ID)
-                @t.Name <br />
-                @t.StreetNumber @t.Street  <br />
-                @t.City, @t.State  @t.Zip
-            </div>
+            <tr>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveTheater", "MyAccount",
+               new {username = Model.userName, theaterID = th.ID})
+                </td>
+                <td>@th.ID</td>
+                <td>
+                    @th.StreetNumber @th.Street <br />
+                    @th.City , @th.State @th.Zip
+                </td>
+            </tr>
         }
-        <input type="submit" value="Remove" />
     }
+</table>
+Back to @Html.ActionLink("My Account", "Me", "Customer", new { username = Model.userName })
+
