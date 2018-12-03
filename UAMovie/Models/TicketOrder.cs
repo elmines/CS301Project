@@ -23,8 +23,8 @@ namespace UAMovie.Models
                 info.GetDiscounts();
 
                 double cost = moviePrice * (AdultTickets
-                                               + info.ChildDiscount * ChildTickets
-                                               + info.SeniorDiscount * SeniorTickets
+                                               + (1.0-info.ChildDiscount) * ChildTickets
+                                               + (1.0-info.SeniorDiscount) * SeniorTickets
                                             );
 
                 if (this.Status == "Cancelled")
