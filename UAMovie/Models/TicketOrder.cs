@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
 
 namespace UAMovie.Models
 {
@@ -39,11 +38,33 @@ namespace UAMovie.Models
             }
 
         }
+        private double MoviePrice
+        {
+            get
+            {
+                Database db = new Database();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = db.conn;
+                cmd.CommandText = String.Format("SELECT m.Price FROM Showing s " +
+                    " INNER JOIN Movie m ON s.MovieName = m.Name" +
+                    " WHERE      s.ID = \'{0}\'",
+                this.ShowingID);
+                OracleDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                double cost = reader.GetDouble(0);
+                cmd.Dispose();
+                db.Dispose();
+                return cost;
+            }
+        }
+
+    
 
         public int ChildTickets { get; set; }
         public int AdultTickets { get; set; }
         public int SeniorTickets { get; set; }
         public String Status { get; set; }
+
         public void insert()
         {
             ID = this.getNewID();

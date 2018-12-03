@@ -64,7 +64,12 @@ namespace UAMovie.Controllers.ViewModelControllers
             ticketOrderViewModel.ticketOrder.insert();
             return View("~/Views/TicketOrder/OrderSuccess.cshtml",ticketOrderViewModel);
         }
-
+        public ActionResult Buy(TicketOrderViewModel ticketOrderViewModel)
+        {
+            ticketOrderViewModel.creditCard.insert();
+            ticketOrderViewModel.ticketOrder.insert();
+            return View("~/Views/TicketOrder/OrderSuccess.cshtml", ticketOrderViewModel);
+        }
         // GET: TicketOrderViewModel
         public ActionResult Index()
         {

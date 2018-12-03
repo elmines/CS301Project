@@ -22,10 +22,10 @@
     </tr>
 }
 
-@using (Html.BeginForm("Buy", "TicketOrderViewModel", FormMethod.Post, new { adultTickets = Model.ticketOrder.AdultTickets, childTickets = Model.ticketOrder.ChildTickets, seniorTickets = Model.ticketOrder.SeniorTickets, userName = Model.userName, theaterID = Model.theaterID, movieName = Model.movieName, showingID = Model.showing.ID }))
+@using (Html.BeginForm("Buy", "TicketOrderViewModel", FormMethod.Post, new {ticketOrderViewModel = Model}))
 {
 
-
+    
     @Html.LabelFor(model => model.creditCard.CardNumber);
     @Html.EditorFor(model => model.creditCard.CardNumber);
     <br />
