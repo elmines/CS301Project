@@ -1,25 +1,30 @@
-﻿@model UAMovie.Models.CreditCard;
+﻿@model UAMovie.Models.ViewModels.CreditCardAccountUserViewModel;
 @{
     ViewData["Title"] = "My Payment Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <table>
     <thead>
-        <td>Select</td>
-        <td>Number</td>
-        <td>Holder</td>
-        <td>Expiration Date</td>
+        <tr>
+            <td>Select</td>
+            <td>Number</td>
+            <td>Holder</td>
+            <td>Expiration Date</td>
+        </tr>
     </thead>
 
-    @{ 
-        CreditCard[] cards = CreditCard.testData();
+    @{
+        List<CreditCard> cards = Model.savedCards;
         foreach (CreditCard c in cards)
         {
             <tr>
-                <td>@Html.RadioButtonFor(model => model.CardNumber, c.CardNumber)</td>
+                <td>@Html.ActionLink("Remove", "RemovePaymentInfo", "CreditCardAccountUserViewModel",
+                   new {cardNumber = c.CardNumber, username = Model.user.Username})</td>
                 <td>@c.CardNumber</td>
                 <td>@c.Holder</td>
                 <td>@c.ExpirationDate</td>
@@ -27,5 +32,7 @@
         }
     }
 </table>
-<input type="submit" value="Remove"/>
+
+Back to @Html.ActionLink("My Account", "Me", "Customer", new { username = Model.user.Username })
+
 

@@ -15,6 +15,38 @@ namespace UAMovie.Models
         public String ExpirationDate { get; set; }
         public int Saved { get; set; }
 
+        public static CreditCard Get(String CardNumber, String UserName)
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            cmd.CommandText = String.Format("SELECT CardNumber, Username FROM CreditCard" +
+                " WHERE CardNumber=\'{0}\' AND Username=\'{1}\'", CardNumber, UserName);
+            OracleDataReader reader = cmd.ExecuteReader();
+            if (!reader.HasRows) return null;
+
+            reader.Read();
+            CreditCard queried = new CreditCard
+            {
+                CardNumber = reader.GetString(0),
+                UserName = reader.GetString(1)
+            };
+            return queried;
+        }
+
+        public void dePrefer()
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            String updateText = String.Format("UPDATE CreditCard SET Saved='0'" +
+                " WHERE Username=\'{0}\' AND CardNumber=\'{1}\'",this.UserName, this.CardNumber);
+            cmd.CommandText = updateText;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            db.Dispose();
+        }
+
         public void insert()
         {
             DatabaseRef db = new DatabaseRef();
@@ -22,30 +54,10 @@ namespace UAMovie.Models
             cmd.Connection = db.conn;
             String insertQuery = "INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('" + this.CardNumber + this.UserName + this.CVV + this.Holder + this.ExpirationDate + "'" + this.Saved + "')";
             cmd.CommandText = insertQuery;
-            try {
-                cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-
-            }
+            cmd.ExecuteNonQuery();
             cmd.Dispose();
             db.Dispose();
         }
 
-        public static CreditCard[] testData()
-        {
-            CreditCard[] data = new CreditCard[2];
-            for (int i = 0; i < data.Length; ++i) data[i] = new CreditCard();
-
-
-            data[0].CardNumber = "0000000000000000"; data[0].Holder = "Aibek Musaev";
-            data[0].ExpirationDate = "10/2018";
-
-            data[1].CardNumber = "1111111111111111"; data[1].Holder = "Ethan Mines";
-            data[1].ExpirationDate = "01/2100";
-
-            return data;
-        }
     }
 }
