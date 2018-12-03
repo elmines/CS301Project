@@ -53,6 +53,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Zip)
                 </td>
+                <td>
+                    @Html.ActionLink("Select", "SelectShowing", "TicketOrderViewModel", new { theaterID = item.ID, userName = Model.userName, movieName = Model.movieName });
+
+                </td>
             </tr>
         }
         @using (Html.BeginForm("DisplaySearchedTheaters", "TheaterViewModel", FormMethod.Post, new { searchName = Model.searchName, userName = Model.userName,movieName = Model.movieName }))

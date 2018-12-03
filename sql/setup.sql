@@ -172,7 +172,7 @@ insert into Cast values ('26', 'Tea Pot of Dreams', 'Laci Westley', 'Dianne Edwa
 insert into Cast values ('27', 'Tea Pot of Dreams', 'Roderick Spence', 'Zachary Wolfe');
 insert into Cast values ('28', 'Tea Pot of Dreams', 'Taryn Wyndham', 'Suzanne Baines');
 
-insert into Showing values ('1', 'The Rise and Fall of Ben Jones', '1', TO_TIMESTAMP('2018-09-08 19:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('1', 'The Rise and Fall of Ben Jones', '1', TO_TIMESTAMP('2018-12-04 19:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('2', 'The Rise and Fall of Ben Jones', '2', TO_TIMESTAMP('2018-10-08 20:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('3', 'The Rise and Fall of Ben Jones', '3', TO_TIMESTAMP('2018-12-04 21:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('4', 'The Rise and Fall of Ben Jones', '4', TO_TIMESTAMP('2018-11-08 22:00', 'YYYY-MM-DD HH24:MI'));
