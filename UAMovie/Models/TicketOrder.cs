@@ -64,7 +64,44 @@ namespace UAMovie.Models
         public int AdultTickets { get; set; }
         public int SeniorTickets { get; set; }
         public String Status { get; set; }
+        public static void Cancel(String orderID)
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;                                                                                                               //id showingID username cardnumber cost ctick atcik stick status
+            String insertQuery = String.Format("Update TicketOrder set Status='Canceled' WHERE ID='{0}'",orderID);
+            cmd.CommandText = insertQuery;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            db.Dispose();
+        }
+        public static TicketOrder Get(String ID)
+        {
+            TicketOrder ticket = new TicketOrder();
+            String readQuery = String.Format("select ID, ShowingID, Username, Cardnumber, Childtickets,adulttickets,seniortickets,status from TicketOrder where ID='{0}'", ID);
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
 
+
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ticket.ID = reader.GetString(0);
+                ticket.ShowingID = reader.GetString(1);
+                ticket.Username = reader.GetString(2);
+                ticket.CardNumber = reader.GetString(3);
+                ticket.ChildTickets = reader.GetInt32(4);
+                ticket.AdultTickets = reader.GetInt32(5);
+                ticket.SeniorTickets = reader.GetInt32(6);
+                ticket.Status = reader.GetString(7);
+                
+            }
+            cmd.Dispose();
+            db.Dispose();
+            return ticket;
+        }
         public void insert()
         {
             ID = this.getNewID();

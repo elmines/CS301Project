@@ -3,6 +3,67 @@
     ViewData["Title"] = "Order Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Order Details</h2>
+<br />
+@Html.LabelFor(model => model.order.ID);
+@Html.DisplayFor(model => model.order.ID);
+<br />
+
+@Html.LabelFor(model => model.order.SeniorTickets);
+@Html.DisplayFor(model => model.order.SeniorTickets);
+<br />
+@Html.LabelFor(model => model.order.ShowingID);
+@Html.DisplayFor(model => model.order.ShowingID);
+<br />
+@Html.LabelFor(model => model.order.Status);
+@Html.DisplayFor(model => model.order.Status);
+<br />
+@Html.LabelFor(model => model.order.Username);
+@Html.DisplayFor(model => model.order.Username);
+<br />
+@Html.LabelFor(model => model.showing.StartTime);
+@Html.DisplayFor(model => model.showing.StartTime);
+
+<br />
+@Html.LabelFor(model => model.theater.Name);
+@Html.DisplayFor(model => model.theater.Name);
+<br />
+@Html.LabelFor(model => model.theater.StreetNumber);
+@Html.DisplayFor(model => model.theater.StreetNumber);
+<br />
+@Html.LabelFor(model => model.theater.Street);
+@Html.DisplayFor(model => model.theater.Street);
+<br />
+@Html.LabelFor(model => model.theater.State);
+@Html.DisplayFor(model => model.theater.State);
+<br />
+@Html.LabelFor(model => model.theater.Zip);
+@Html.DisplayFor(model => model.theater.Zip);
+<br />
+@Html.LabelFor(model => model.showing.MovieName);
+@Html.DisplayFor(model => model.showing.MovieName);
+<br />
+@Html.LabelFor(model => model.movie.Genre);
+@Html.DisplayFor(model => model.movie.Genre);
+<br />
+
+@Html.LabelFor(model => model.order.Cost);
+@Html.DisplayFor(model => model.order.Cost);
+<br />
+@Html.LabelFor(model => model.movie.ReleaseDate);
+@Html.DisplayFor(model => model.movie.ReleaseDate);
+<br />
+
+@Html.LabelFor(model => model.movie.AgeRating);
+@Html.DisplayFor(model => model.movie.AgeRating);
+<br />
+@Html.LabelFor(model => model.movie.Duration);
+@Html.DisplayFor(model => model.movie.Duration) Minutes
+
+<br />
+
+@if(Model.showing.StartTime > DateTime.Now)
+{
+    @Html.ActionLink("Cancel Order","Cancel","TicketOrderAccountUserViewModel",new { orderID = Model.order.ID})
+}
 

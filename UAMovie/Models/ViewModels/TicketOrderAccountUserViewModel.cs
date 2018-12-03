@@ -10,9 +10,11 @@ namespace UAMovie.Models.ViewModels
     {
         public String username { get; set; }
         public List<TicketOrder> orders { get; set; }
-
+        public TicketOrder order { get; set; }
         public List<Showing> showings { get; set; } //Parallel array of Showings
-
+        public Theater theater { get; set; }
+        public Showing showing { get; set; }
+        public Movie movie { get; set; }
         public String selectedOrderID { get; set; }
 
         public void loadOrders()

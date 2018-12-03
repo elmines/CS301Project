@@ -12,6 +12,32 @@ namespace UAMovie.Models
         public String MovieName { get; set; }
         public String TheaterID { get; set; }
         public DateTime StartTime { get; set; }
+        public static Showing GetShowing(String ID)
+        {
+            Database db = new Database();
+
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            //does this handle nulls? TO be determined...
+            //does this handle nulls? TO be determined...
+            String readQuery = String.Format("select * from showing where showing.ID ='{0}'", ID);
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
+            Showing showing = new Showing();
+
+            while (reader.Read())//gets a row or exits the loop if no more
+            {
+                showing.ID = reader.GetString(0);
+                showing.MovieName = reader.GetString(1);
+                showing.TheaterID = reader.GetString(2);
+                showing.StartTime = reader.GetDateTime(3);
+
+            }
+
+            cmd.Dispose();
+            db.Dispose();
+            return showing;
+        }
         public static List<Showing> GetFutureShowings(String movieName, String theaterID)
         {
             List<Showing> showings = new List<Showing>();
