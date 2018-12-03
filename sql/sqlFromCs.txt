@@ -1,0 +1,60 @@
+//CreditCardAccountUserViewModel
+String query = String.Format("SELECT CardNumber, Holder, ExpirationDate FROM CreditCard" + " WHERE Username=\'{0}\' AND SAVED='1'", this.user.Username);
+
+//MovieAccountUserViewModel
+String readQuery = String.Format("SELECT Title, Body, Rating, Username FROM Review where MovieName =\'{0}\'", movie.Name);
+String readQuery = "SELECT Name FROM Movie where NowShowing =1";
+String readQuery = String.Format("SELECT Actor, Character FROM Cast WHERE MovieName=\'{0}\'", movie.Name);
+
+//TheaterViewModel
+String readQuery = String.Format("select id,name, state, city, streetnumber, street,zip from theater, PreferredTheater where preferredtheater.theaterid = theater.id and preferredtheater.username ='{0}'",userName);
+
+//TicketOrderAccountUserViewModel
+cmd.CommandText = String.Format("SELECT " + "o.ID, o.Status, o.AdultTickets, o.ChildTickets, o.SeniorTickets" + ", s.MovieName, s.ID FROM" + " TicketOrder o INNER JOIN Showing s ON o.ShowingID=s.ID" + " WHERE o.Username=\'{0}\'", this.username);
+
+//AccountUser
+String insertQuery = "INSERT INTO AccountUser (username,emailaddress,password) VALUES('" + this.Username + "','" + this.EmailAddress + "','" + this.Password + "')";
+String loginQuery = "Select Username, Password from AccountUser where (Username = '"+this.Username+"'  AND Password = '"+this.Password+"')";
+String loginQuery = "Select Username from Manager where (Username = '" + this.Username + "')";
+
+//CreditCard
+md.CommandText = String.Format("SELECT CardNumber, Username FROM CreditCard" + " WHERE CardNumber=\'{0}\' AND Username=\'{1}\'", CardNumber, UserName);
+String updateText = String.Format("UPDATE CreditCard SET Saved='0'" + " WHERE Username=\'{0}\' AND CardNumber=\'{1}\'",this.UserName, this.CardNumber);
+String insertQuery = String.Format("INSERT INTO CreditCard (CardNumber,Username,CVV,Holder,ExpirationDate,Saved) VALUES('{0}','{1}','{2}','{3}','{4}',{5})",this.CardNumber,this.UserName,this.CVV,this.Holder,this.ExpirationDate,this.Saved);
+
+//Customer
+String insertQuery = "INSERT INTO Customer (username) VALUES('" + this.username + "')";
+
+//Manager
+String insertQuery = "INSERT INTO Manager (username) VALUES('" + this.Username + "')";
+
+//Movie
+String queryString = String.Format("SELECT * FROM TicketOrder o" + " INNER JOIN Showing s ON o.ShowingID = s.ID" +  " WHERE o.Status<>\'Cancelled\'" + "  AND s.MovieName = \'{0}\'" + "  AND o.Username = \'{1}\'" + "  AND (SELECT current_timestamp FROM dual) >= s.StartTime", this.Name, username);
+cmd2.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",this.Name, username);
+String readQuery = "SELECT * FROM Movie where Name='" + movieName + "'";
+
+//Review
+readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM Review HAVING COUNT(ID) > 0";
+String insertQuery = String.Format("INSERT INTO REVIEW (ID, Username, MovieName, Title, Body, Rating) Values ('{0}','{1}','{2}','{3}','{4}',{5})",this.ID,this.Username , this.MovieName,this.Title,this.Body,this.rating);
+
+//Showing
+String readQuery = String.Format("select * from showing where showing.ID ='{0}'", ID);
+String readQuery = String.Format("select name, starttime,ID from showing right join movie on showing.moviename = movie.name where movie.name = '{0}'AND showing.TheaterID = '{1}' order by movie.name ", movieName,theaterID);
+
+
+//SystemInfo
+String readQuery = String.Format("select SeniorDiscount,ChildDiscount, RefundFee from SystemInfo");
+
+//Theater
+String readQuery = String.Format("select * from theater where theater.ID ='{0}'", ID);
+String readQuery = String.Format("select * from theater where theater.name like '%{0}%' or theater.city like '%{0}%' or theater.state = '%{0}%'",searchName);
+
+//TicketOrder
+cmd.CommandText = String.Format("SELECT m.Price FROM Showing s " + " INNER JOIN Movie m ON s.MovieName = m.Name" + " WHERE s.ID = \'{0}\'", this.ShowingID);
+String insertQuery = String.Format("Update TicketOrder set Status='Canceled' WHERE ID='{0}'",orderID);
+String readQuery = String.Format("select ID, ShowingID, Username, Cardnumber, Childtickets, adulttickets, seniortickets, status from TicketOrder where ID='{0}'", ID);
+String insertQuery = String.Format("INSERT INTO TicketOrder (ID,ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,Status) VALUES('{8}','{0}','{1}','{2}',{3},{4},{5},{6},'{7}')",ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,"Purchased",ID);
+readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM TicketOrder HAVING COUNT(ID) > 0";
+
+//SystemInfoAccountUserController
+emailCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE" +  " EmailAddress='{0}'", systemInfoAccountUser.user.EmailAddress);
