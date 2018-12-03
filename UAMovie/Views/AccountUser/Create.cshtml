@@ -1,20 +1,28 @@
 ﻿@model UAMovie.Models.ViewModels.SystemInfoAccountUser;
-
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = "Sign Up";
 }
-<h2>Create User</h2>
+<h2>@ViewData["Title"]</h2>
+@{
+    if (ViewBag.errorMessage != null)
+    {
+        <p style="color: red">@ViewBag.errorMessage</p>
+    }
+
+    String asterisk = "*";
+}
+
 @using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))
 {
-    @Html.LabelFor(model => model.user.Username);
+    @asterisk @Html.LabelFor(model => model.user.Username);
     @Html.EditorFor(model => model.user.Username);
     <br />
 
-    @Html.LabelFor(model => model.user.EmailAddress);
+    @asterisk @Html.LabelFor(model => model.user.EmailAddress);
     @Html.EditorFor(model => model.user.EmailAddress);
     <br />
 
-    @Html.LabelFor(model => model.user.Password);
+    @asterisk @Html.LabelFor(model => model.user.Password);
     @Html.EditorFor(model => model.user.Password);
     <br />
 
@@ -28,12 +36,10 @@
     @Html.HiddenFor(model => model.info.SeniorDiscount);
     <input type="submit" value="Create" class="btn btn-default" />
 
+    <p>@asterisk Required</p>
+
 
 }
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<p>
+    @Html.ActionLink("Back to Login", "Index", "Home")
+</p>
