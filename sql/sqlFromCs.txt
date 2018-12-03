@@ -58,3 +58,26 @@ readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM TicketOrder HAVING COUNT
 
 //SystemInfoAccountUserController
 emailCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE" +  " EmailAddress='{0}'", systemInfoAccountUser.user.EmailAddress);
+nameCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE"+" Username='{0}'", systemInfoAccountUser.user.Username);
+cmd.CommandText = "select ManagerPassword from SystemInfo";
+          
+//ManagerController.cs
+ cmd.CommandText = "SELECT EXTRACT(month from StartTime) AS ShowingMonth, s.MovieName, COUNT(*) AS OrderCount" +
+                " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID = s.ID" +
+                " GROUP BY EXTRACT(month from StartTime), s.MovieName" +
+                " ORDER BY ShowingMonth";
+
+//ReviewController.cs
+String readQuery = "SELECT AVG(r.Rating), COUNT(r.RATING) FROM Review r" +
+                               "  WHERE r.MovieName=\'" + movieName + "\'";
+String readQuery = "SELECT FROM TicketOrder o" +
+                               " INNER JOIN Customer    c ON o.Username=c.Username" +
+                               " INNER JOIN Showing     s ON o.ShowingID=s.ID" +
+                               " INNER JOIN Movie       m ON o.MovieName=m.Name" +
+                               " WHERE                       o.Status<>\'Cancelled\'" +
+                               "   AND                       c.Username=\'"+user.Username + "\'";
+  
+
+
+
+
