@@ -25,7 +25,7 @@ namespace UAMovie.Models.ViewModels
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
 
-            String readQuery = String.Format("SELECT Title, Body, Rating FROM Review where MovieName =\'{0}\'", movie.Name);
+            String readQuery = String.Format("SELECT Title, Body, Rating, Username FROM Review where MovieName =\'{0}\'", movie.Name);
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -34,6 +34,7 @@ namespace UAMovie.Models.ViewModels
                 tempReview.Title = reader.GetString(0);
                 tempReview.Body = reader.GetString(1);
                 tempReview.rating = reader.GetInt32(2);
+                tempReview.Username = reader.GetString(3);
                 reviews.Add(tempReview);
             }
             cmd.Dispose();

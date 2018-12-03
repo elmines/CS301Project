@@ -17,6 +17,50 @@ namespace UAMovie.Models
         public int Duration { get; set; }
         public String Genre { get; set; }
         public int NowPlaying { get; set; }
+
+        public String durationText {
+            get
+            {
+                int hours = Duration / 60;
+                int minutes = Duration % 60;
+                if (minutes > 0) return String.Format("{0} hours and {1} minutes", hours, minutes);
+                return                  String.Format("{0} hours", hours);
+            }
+        }
+
+        public bool canReview(String username)
+        {
+            Database db = new Database();
+
+            //Check if they've seen the movie
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandText = String.Format("SELECT * FROM TicketOrder o" +
+                " INNER JOIN Showing s ON o.ShowingID = s.ID" +
+                " WHERE                   o.Status<>\'Cancelled\'" +
+                "  AND                    o.MovieName = \'{0}\'" +
+                "  AND                    o.Username = \'{1}\'" +
+                "  AND (SELECT current_timestamp FROM dual) >= s.StartTime",
+                this.Name, username);
+            if (!cmd.ExecuteReader().HasRows)
+            {
+                cmd.Dispose();
+                db.Dispose();
+                return false;
+            }
+
+
+            Boolean canReview = true;
+            //Check if they've already written a review
+            OracleCommand cmd2 = new OracleCommand();
+            cmd2.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",
+                                            this.Name, username);
+            if (cmd2.ExecuteReader().HasRows) canReview = false;
+            cmd2.Dispose();
+            db.Dispose();
+
+            return canReview;
+        }
+
         public static Movie Get(String movieName)
         {
             //establish connection

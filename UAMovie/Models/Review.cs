@@ -16,9 +16,35 @@ namespace UAMovie.Models
         public String Body { get; set; }
         public int rating { get; set; }
 
+        public bool canReview(String username)
+        {
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+
+            cmd.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",
+                                            this.MovieName, username);
+
+            return true;
+        }
+
         public bool insert()
         {
             Database db = new Database();
+
+            OracleCommand readCmd = new OracleCommand();
+            readCmd.Connection = db.conn;
+            readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM Review HAVING COUNT(ID) > 0";
+            OracleDataReader reader = readCmd.ExecuteReader();
+
+            String ReviewID = "1";
+            if (reader.HasRows)
+            {
+                reader.Read();
+                ReviewID = (String)reader.GetInt64(0).ToString();
+            }
+            this.ID = ReviewID;
+            readCmd.Dispose();
+
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
             String insertQuery = String.Format("INSERT INTO REVIEW (ID, Username, MovieName, Title, Body, Rating) Values ('{0}','{1}','{2}','{3}','{4}',{5})",this.ID,this.Username , this.MovieName,this.Title,this.Body,this.rating);

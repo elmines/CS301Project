@@ -25,18 +25,41 @@ namespace UAMovie.Controllers
                 movieAccountUserViewModel.newReview.insert();
                 return RedirectToAction("NowPlaying","Customer",new { username = movieAccountUserViewModel.user.Username });
             }
-            catch
+            catch(Exception ex)
             {
                 //error message???
+                throw ex;
                 return View("~/Views/Movie/WriteReview.cshtml",movieAccountUserViewModel);
             }
         }
+
+        //<numRevies, avgRating>
+        public static Tuple<Int32, float> getAverageRating(String movieName)
+        {
+
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            String readQuery = "SELECT AVG(r.Rating), COUNT(r.RATING) FROM Review r" +
+                               "  WHERE r.MovieName=\'" + movieName + "\'";
+
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            int reviewCount = reader.GetInt32(1);
+            float average = (reviewCount > 0) ? reader.GetFloat(0) : -1;
+
+            db.Dispose();
+            cmd.Dispose();
+            return new Tuple<Int32, float>(reviewCount, average);
+        }
+
         public static Boolean hasWatched(AccountUser user, String movieName)
         {
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();
-
-            //FIXME: Need to check if the movie showing as happened yet
+            cmd.Connection = db.conn;
             String readQuery = "SELECT FROM TicketOrder o" +
                                " INNER JOIN Customer    c ON o.Username=c.Username" +
                                " INNER JOIN Showing     s ON o.ShowingID=s.ID" +

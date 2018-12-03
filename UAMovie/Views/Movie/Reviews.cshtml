@@ -3,12 +3,9 @@
     ViewData["Title"] = Model.movie.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    double average = 0.0;
-    foreach (Review r in Model.reviews)
-    {
-        average += r.rating;
-    }
-    average /= Model.reviews.Count;
+    Tuple<Int32, float> reviewStats = UAMovie.Controllers.ReviewController.getAverageRating(Model.movie.Name);
+    float average = reviewStats.Item2;
+
 
 }
 @Html.HiddenFor(model => model.user.Username)
@@ -16,14 +13,18 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<p>Average Rating: @String.Format("{0:N1}/5.0", average)</p>
 
-<p>Average Rating: @String.Format("{0:N2}/5", average), Back to @Html.ActionLink("overview", "GetMovie", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })</p>
+<p> @Html.ActionLink("Write", "WriteReview", "MovieAccountUserViewModel", new { username = Model.user.Username, movieName = Model.movie.Name}) a Review
+    | Back to @Html.ActionLink("overview", "GetMovie", "MovieAccountUserViewModel", new { movieAccountUserViewModel = Model, movieName = Model.movie.Name })
+</p>
+
 
 @{
     foreach (Review r in Model.reviews)
     {
         <div class="review-box">
-            <h3>@r.Title</h3>
+            <p><strong>@r.Title</strong> by @r.Username</p>
             <p>@String.Format("{0}/{1}", r.rating, 5)</p>
             <p>@r.Body</p>
         </div>

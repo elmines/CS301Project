@@ -41,10 +41,4 @@
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Views\Movie\Overview.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>
-
 </Project>

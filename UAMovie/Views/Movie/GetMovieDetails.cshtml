@@ -7,20 +7,13 @@
 @Html.HiddenFor(model => model.user.EmailAddress)
 
 @{
-    int hours = Model.movie.Duration / 60;
-    int minutes = Model.movie.Duration % 60;
-    String length;
-    if (minutes > 0)
+    Tuple<Int32, float> reviewData = UAMovie.Controllers.ReviewController.getAverageRating(Model.movie.Name);
+    String reviewDescription = "Not yet reviewed";
+    if (reviewData.Item1 > 0)
     {
-        length = String.Format("{0} hours and {1} minutes", hours, minutes);
+        reviewDescription = String.Format("Rated {0:F1}/{1:F1} by {2:n0} viewer(s)",
+            reviewData.Item2, 5.0, reviewData.Item1);
     }
-    else
-    {
-        length = String.Format("{0} hours", hours);
-    }
-
-    float avgRating = 4.9f;
-    int numRatings = 1000000000;
 
 }
 
@@ -28,8 +21,8 @@
 <p><em>@Html.DisplayFor(model => model.movie.ReleaseDate)</em></p>
 <ul>
     <li>Rated <strong>@Html.DisplayFor(model => model.movie.AgeRating)</strong>, @Html.DisplayFor(model => model.movie.Genre)</li>
-    <li>@length</li>
-    <li>Rated @String.Format("{0:F1}/{1:F1}", avgRating, 5.0) by @String.Format("{0:n0}", numRatings) viewers</li>
+    <li>@Model.movie.durationText</li>
+    <li>@reviewDescription</li>
 </ul>
 
 <p>@Html.DisplayFor(model => model.movie.Synopsis)</p>

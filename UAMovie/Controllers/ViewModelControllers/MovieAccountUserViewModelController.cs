@@ -11,19 +11,25 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class MovieAccountUserViewModelController : Controller
     {
-        public ActionResult WriteReview(String userName, String movieName)
+        public ActionResult WriteReview(String username, String movieName)
         {
 
             MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
             movieAccountUserViewModel.user = new AccountUser();
-            movieAccountUserViewModel.user.Username = userName;
+            movieAccountUserViewModel.user.Username = username;
             movieAccountUserViewModel.movie = Movie.Get(movieName);
             movieAccountUserViewModel.newReview = new Review();
             return View("~/Views/Movie/WriteReview.cshtml", movieAccountUserViewModel);
         }
 
-        public ActionResult GetReviews(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        public ActionResult GetReviews(String username, String movieName)
         {
+            MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
+            movieAccountUserViewModel.movies = new List<Movie>(); //Stupid manual instantiation of List
+
+            movieAccountUserViewModel.user = new AccountUser();
+            movieAccountUserViewModel.user.Username = username;
+
             movieAccountUserViewModel.movie = Movie.Get(movieName);
             movieAccountUserViewModel.reviews = new List<Review>();
             movieAccountUserViewModel.GetReviews();
@@ -49,9 +55,13 @@ namespace UAMovie.Controllers.ViewModelControllers
             return View("~/Views/Movie/GetMovie.cshtml", movieAccountUserViewModel);
         }
 
-        public ActionResult GetMovieDetails(MovieAccountUserViewModel movieAccountUserViewModel, String movieName)
+        public ActionResult GetMovieDetails(String username, String movieName)
         {
+            MovieAccountUserViewModel movieAccountUserViewModel = new MovieAccountUserViewModel();
+            movieAccountUserViewModel.user = new AccountUser();
+            movieAccountUserViewModel.user.Username = username;
             movieAccountUserViewModel.movie = Movie.Get(movieName);
+
             movieAccountUserViewModel.cast = new List<Cast>(); //Stupid manual instantiation of list
             movieAccountUserViewModel.GetCast();
             return View("~/Views/Movie/GetMovieDetails.cshtml", movieAccountUserViewModel);
