@@ -23,7 +23,39 @@ namespace UAMovie.Controllers
 
         public IActionResult RevenueReport()
         {
-            return View();
+            List<RevStats> stats = GetRevenueStats();
+            return View("~/Views/Manager/RevenueReport.cshtml", stats);
+        }
+
+        public static List<RevStats> GetRevenueStats()
+        {
+            List<RevStats> stats = new List<RevStats>();
+
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            cmd.CommandText = "SELECT " +
+                " EXTRACT(month from StartTime) AS ShowingMonth, AdultTickets, ChildTickets, SeniorTickets, MovieName" +
+                " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID=s.ID" +
+                "                    INNER JOIN Movie m   ON s.MovieName=m.Name";
+
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                stats.Add(new RevStats
+                {
+                    monthCode = reader.GetInt32(0),
+                    adultTickets = reader.GetInt32(1),
+                    childTickets = reader.GetInt32(2),
+                    seniorTickets = reader.GetInt32(3),
+                    movieName = reader.GetString(4)
+                });
+            }
+            reader.Dispose();
+            cmd.Dispose();
+            db.Dispose();
+
+            return stats;
         }
 
 
