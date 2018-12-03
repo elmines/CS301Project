@@ -22,10 +22,17 @@
     </tr>
 }
 
-@using (Html.BeginForm("Buy", "TicketOrderViewModel", FormMethod.Post, new {ticketOrderViewModel = Model}))
+@using (Html.BeginForm("BuyNewCard", "TicketOrderViewModel", FormMethod.Post, new { ticketOrderViewModel = Model }))
 {
+    @Html.HiddenFor(model => model.ticketOrder.ShowingID);
+    @Html.HiddenFor(model => model.userName);
+    @Html.HiddenFor(model => model.ticketOrder.SeniorTickets);
+    @Html.HiddenFor(model => model.ticketOrder.AdultTickets);
+    @Html.HiddenFor(model => model.ticketOrder.ChildTickets);
+    @Html.HiddenFor(model => model.ticketOrder.Username);
+    @Html.HiddenFor(model => model.theaterID);
+    @Html.HiddenFor(model => model.showing.ID);
 
-    
     @Html.LabelFor(model => model.creditCard.CardNumber);
     @Html.EditorFor(model => model.creditCard.CardNumber);
     <br />

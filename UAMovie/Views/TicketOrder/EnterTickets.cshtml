@@ -23,7 +23,7 @@
     @Html.DisplayFor(model => model.theater.Zip)
     <br />
 
-
+    @Html.HiddenFor(model => model.ticketOrder.ShowingID);
     @Html.LabelFor(model => model.ticketOrder.AdultTickets);
     @Html.EditorFor(model => model.ticketOrder.AdultTickets);
     <br />

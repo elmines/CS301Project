@@ -29,7 +29,7 @@ namespace UAMovie.Controllers.ViewModelControllers
             ticketOrderViewModel.systemInfo.GetDiscounts();
             ticketOrderViewModel.movieName = movieName;
             ticketOrderViewModel.showingID = showingID;
-            
+            ticketOrderViewModel.ticketOrder.ShowingID = showingID;//DO NOT REMOVE THIS
             return View("~/Views/TicketOrder/EnterTickets.cshtml", ticketOrderViewModel);
         }
         public ActionResult EnterCardNumber(TicketOrderViewModel ticketOrderViewModel)
@@ -64,8 +64,11 @@ namespace UAMovie.Controllers.ViewModelControllers
             ticketOrderViewModel.ticketOrder.insert();
             return View("~/Views/TicketOrder/OrderSuccess.cshtml",ticketOrderViewModel);
         }
-        public ActionResult Buy(TicketOrderViewModel ticketOrderViewModel)
+        public ActionResult BuyNewCard(TicketOrderViewModel ticketOrderViewModel)
         {
+            ticketOrderViewModel.creditCard.UserName = ticketOrderViewModel.userName;
+            ticketOrderViewModel.ticketOrder.Username = ticketOrderViewModel.userName;
+            ticketOrderViewModel.ticketOrder.CardNumber = ticketOrderViewModel.creditCard.CardNumber;
             ticketOrderViewModel.creditCard.insert();
             ticketOrderViewModel.ticketOrder.insert();
             return View("~/Views/TicketOrder/OrderSuccess.cshtml", ticketOrderViewModel);
