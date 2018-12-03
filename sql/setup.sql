@@ -179,7 +179,7 @@ insert into Showing values ('4', 'The Rise and Fall of Ben Jones', '4', TO_TIMES
 insert into Showing values ('5', 'The Rise and Fall of Ben Jones', '5', TO_TIMESTAMP('2018-12-10 23:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('6', 'Iron Man', '2', TO_TIMESTAMP('2018-08-08 12:08', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('7', 'Iron Man', '3', TO_TIMESTAMP('2018-12-08 13:15', 'YYYY-MM-DD HH24:MI'));
-insert into Showing values ('8', 'Iron Man', '4', TO_TIMESTAMP('2018-04-08 13:15', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('8', 'Iron Man', '4', TO_TIMESTAMP('2018-09-08 13:15', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('9', 'Iron Man', '5', TO_TIMESTAMP('2018-11-08 11:15', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('10', 'Bat Man', '3', TO_TIMESTAMP('2018-10-22 12:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('11', 'Bat Man', '4', TO_TIMESTAMP('2018-10-12 13:00', 'YYYY-MM-DD HH24:MI'));
@@ -227,7 +227,7 @@ insert into TicketOrder values ('16', '4', 'username', '1234567891643876', '100.
 insert into TicketOrder values ('17', '4', 'dayron', '9620981257653538', '100.00', '1', '0', '0', 'Cancelled');
 insert into TicketOrder values ('18', '4', 'meggie', '8466937575930257', '100.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('19', '4', 'linux', '2450067421146799', '100.00', '1', '0', '0', 'Purchased');
-insert into TicketOrder values ('20', '4', 'tuscaloosa', '0573628566967728', '100.00', '0', '1', '0', 'Purchased');
+insert into TicketOrder values ('20', '4', 'tuscaloosa', '0573628566967728', '70.00', '0', '1', '0', 'Purchased');
 insert into TicketOrder values ('21', '5', 'username', '1234567891643876', '100.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('22', '5', 'dayron', '9620981257653538', '100.00', '1', '0', '0', 'Cancelled');
 insert into TicketOrder values ('23', '5', 'meggie', '8466937575930257', '100.00', '1', '0', '0', 'Purchased');
@@ -248,7 +248,6 @@ insert into TicketOrder values ('37', '8', 'dayron', '9620981257653538', '10.00'
 insert into TicketOrder values ('38', '8', 'meggie', '8466937575930257', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('39', '8', 'linux', '2450067421146799', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('40', '8', 'tuscaloosa', '0573628566967728', '100.00', '10', '0', '0', 'Cancelled');
-insert into TicketOrder values ('41', '9', 'username', '1234567891643876', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('41', '28', 'username', '1234567891643876', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('42', '29', 'username', '1234567891643876', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('43', '30', 'username', '1234567891643876', '10.00', '1', '0', '0', 'Purchased');
@@ -270,6 +269,7 @@ insert into TicketOrder values ('58', '27', 'windows', '7428543289742075', '10.0
 insert into TicketOrder values ('59', '6', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('60', '27', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
 insert into TicketOrder values ('61', '10', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
-insert into TicketOrder values ('61', '14', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
-insert into TicketOrder values ('62', '28', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
-insert into TicketOrder values ('63', '29', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
+insert into TicketOrder values ('62', '14', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
+insert into TicketOrder values ('63', '28', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
+insert into TicketOrder values ('64', '29', 'windows', '7428543289742075', '10.00', '1', '0', '0', 'Purchased');
+insert into TicketOrder values ('65', '9', 'username', '1234567891643876', '10.00', '1', '0', '0', 'Purchased');
