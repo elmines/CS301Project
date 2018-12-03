@@ -55,6 +55,9 @@ String insertQuery = String.Format("Update TicketOrder set Status='Canceled' WHE
 String readQuery = String.Format("select ID, ShowingID, Username, Cardnumber, Childtickets, adulttickets, seniortickets, status from TicketOrder where ID='{0}'", ID);
 String insertQuery = String.Format("INSERT INTO TicketOrder (ID,ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,Status) VALUES('{8}','{0}','{1}','{2}',{3},{4},{5},{6},'{7}')",ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,"Purchased",ID);
 readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM TicketOrder HAVING COUNT(ID) > 0";
+cmd.CommandText = String.Format("SELECT EXTRACT(MONTH FROM StartTime) FROM" +
+                    " Showing WHERE ID='{0}'", this.ShowingID);
+
 
 //SystemInfoAccountUserController
 emailCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE" +  " EmailAddress='{0}'", systemInfoAccountUser.user.EmailAddress);
@@ -62,10 +65,8 @@ nameCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE"+" Username
 cmd.CommandText = "select ManagerPassword from SystemInfo";
           
 //ManagerController.cs
-md.CommandText = "SELECT " +
-                " EXTRACT(month from StartTime) AS ShowingMonth, AdultTickets, ChildTickets, SeniorTickets, MovieName" +
-                " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID=s.ID" +
-                "                    INNER JOIN Movie m   ON s.MovieName=m.Name";
+cmd.CommandText = "SELECT o.AdultTickets, o.ChildTickets, o.SeniorTickets, o.Status, o.ShowingID" +
+                    " FROM TicketOrder o";
 cmd.CommandText = "SELECT EXTRACT(month from StartTime) AS ShowingMonth, s.MovieName, COUNT(*) AS OrderCount" +
                 " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID = s.ID" +
                 " GROUP BY EXTRACT(month from StartTime), s.MovieName" +
