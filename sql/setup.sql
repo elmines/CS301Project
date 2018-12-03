@@ -172,9 +172,9 @@ insert into Cast values ('26', 'Tea Pot of Dreams', 'Laci Westley', 'Dianne Edwa
 insert into Cast values ('27', 'Tea Pot of Dreams', 'Roderick Spence', 'Zachary Wolfe');
 insert into Cast values ('28', 'Tea Pot of Dreams', 'Taryn Wyndham', 'Suzanne Baines');
 
-insert into Showing values ('1', 'The Rise and Fall of Ben Jones', '1', TO_TIMESTAMP('2018-12-04 19:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('1', 'The Rise and Fall of Ben Jones', '1', TO_TIMESTAMP('2018-09-08 19:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('2', 'The Rise and Fall of Ben Jones', '2', TO_TIMESTAMP('2018-10-08 20:00', 'YYYY-MM-DD HH24:MI'));
-insert into Showing values ('3', 'The Rise and Fall of Ben Jones', '3', TO_TIMESTAMP('2018-12-04 21:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('3', 'The Rise and Fall of Ben Jones', '3', TO_TIMESTAMP('2018-12-09 21:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('4', 'The Rise and Fall of Ben Jones', '4', TO_TIMESTAMP('2018-11-08 22:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('5', 'The Rise and Fall of Ben Jones', '5', TO_TIMESTAMP('2018-12-10 23:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('6', 'Iron Man', '2', TO_TIMESTAMP('2018-08-08 12:08', 'YYYY-MM-DD HH24:MI'));
@@ -207,6 +207,41 @@ insert into Showing values ('32', 'When the Tide Changes', '5', TO_TIMESTAMP('20
 insert into Showing values ('33', 'Tea Pot of Dreams', '5', TO_TIMESTAMP('2018-11-08 12:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('34', 'Lamp', '5', TO_TIMESTAMP('2018-11-08 12:00', 'YYYY-MM-DD HH24:MI'));
 insert into Showing values ('35', 'Mr. Meed', '5', TO_TIMESTAMP('2018-11-08 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('36', 'The Rise and Fall of Ben Jones', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('37', 'Sticky Note Sunday', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('38', 'The Sloth', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('39', 'Lights Out', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('40', 'Anatomy of Heartbreak', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('41', 'American Disposal', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('42', 'When the Tide Changes', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('43', 'Tea Pot of Dreams', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('44', 'Lamp', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('45', 'Mr. Meed', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('46', 'The Rise and Fall of Ben Jones', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('47', 'Sticky Note Sunday', '5', TO_TIMESTAMP('2018-12-05 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('48', 'The Sloth', '5', TO_TIMESTAMP('2018-12-08 12:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('49', 'Lights Out', '5', TO_TIMESTAMP('2018-12-08 13:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('50', 'Anatomy of Heartbreak', '5', TO_TIMESTAMP('2018-12-06 15:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('51', 'American Disposal', '5', TO_TIMESTAMP('2018-12-06 16:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('52', 'When the Tide Changes', '5', TO_TIMESTAMP('2018-12-06 15:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('53', 'Tea Pot of Dreams', '5', TO_TIMESTAMP('2018-12-06 14:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('54', 'Lamp', '5', TO_TIMESTAMP('2018-12-06 1:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('55', 'Mr. Meed', '5', TO_TIMESTAMP('2018-12-06 1:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('56', 'The Rise and Fall of Ben Jones', '5', TO_TIMESTAMP('2018-12-06 20:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('57', 'Sticky Note Sunday', '5', TO_TIMESTAMP('2018-12-06 17:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('58', 'The Sloth', '5', TO_TIMESTAMP('2018-02-06 1:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('59', 'Lights Out', '5', TO_TIMESTAMP('2018-12-06 2:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('60', 'Anatomy of Heartbreak', '5', TO_TIMESTAMP('2018-12-07 13:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('61', 'American Disposal', '5', TO_TIMESTAMP('2018-12-07 14:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('62', 'When the Tide Changes', '5', TO_TIMESTAMP('2018-12-07 17:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('63', 'Tea Pot of Dreams', '5', TO_TIMESTAMP('2018-12-07 11:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('64', 'Lamp', '5', TO_TIMESTAMP('2018-12-07 09:00', 'YYYY-MM-DD HH24:MI'));
+insert into Showing values ('65', 'Mr. Meed', '5', TO_TIMESTAMP('2018-12-07 09:00', 'YYYY-MM-DD HH24:MI'));
+
+
+
+
+
 
 insert into TicketOrder values ('1', '1', 'username', '1234567891643876', '1090.00', '10', '0', '3', 'Purchased');
 insert into TicketOrder values ('2', '1', 'dayron', '9620981257653538', '2010.00', '3', '10', '13', 'Cancelled');
