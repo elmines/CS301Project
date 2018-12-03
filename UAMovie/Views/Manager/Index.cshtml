@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Main Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,6 +8,6 @@
 <ul>
     <li> <a asp-area="" asp-action="MovieReport">Movie Report</a></li>
     <li> <a asp-area="" asp-action="RevenueReport">Revenue Report</a></li>
-
+    <li>@Html.ActionLink("Log out", "LoginForm", "AccountUser")</li>
 </ul>
 

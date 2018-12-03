@@ -1,7 +1,48 @@
-﻿@{
+﻿@model List<UAMovie.Models.OrderStats>
+
+@{
     ViewData["Title"] = "Movie Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<OrderStats> stats = Model;
+    stats.Sort();
+
+    List<String> uniqueMonths = new List<string>();
+    List<Int32> monthStarts = new List<Int32>();
+    int q = 0;
+    foreach (OrderStats stat in stats)
+    {
+        if (!uniqueMonths.Contains(stat.Month))
+        {
+            uniqueMonths.Add(stat.Month);
+            monthStarts.Add(q);
+            ++q;
+        }
+    }
+
+    List<string> monthLabels = new List<string>();
+    List<List<string>> movieGroups = new List<List<string>>();
+    List<List<Int32>> countGroups = new List<List<Int32>>();
+
+    for (int i = uniqueMonths.Count - 1; i >= 0 && i >= uniqueMonths.Count - 3; --i)
+    {
+
+        monthLabels.Insert(0, uniqueMonths.ElementAt(i));
+
+        List<string> movieGroup = new List<string>();
+        List<Int32> countGroup = new List<Int32>();
+
+        for (int j = monthStarts.ElementAt(i); j < monthStarts.ElementAt(i) + 3 && j < stats.Count; ++j)
+        {
+            movieGroup.Add(stats.ElementAt(j).MovieName);
+            countGroup.Add(stats.ElementAt(j).OrderCount);
+        }
+        movieGroups.Insert(0, movieGroup);
+        countGroups.Insert(0, countGroup);
+    }
+
 }
+
 
 <h2>Movie Report</h2>
 <table>
@@ -14,39 +55,31 @@
 
     </thead>
 
-    <?php ?>
-
     @{
-        String[] Months = { "August", "September", "October" };
-        string[,] Movies = new string[,]
+        for (int i = 0; i < monthLabels.Count; ++i)
         {
-        {"Christopher Robin", "Fast and Furious 57", "The Rise and Fall of Ben Jones"},
-        {"The Bourne Comedy", "Star Wars 0", "Taken 3"},
-        {"Venom", "Hotel Transylvannia 4", "Another Romantic Comedy"}
-        };
-        int[,] orders = { { 2000, 2, 9001 }, { 100, 0, 3 }, { 1, 4, 10000 } };
 
-        for (int i = 0; i < Months.Length; ++i)
-        {
-            for (int j = 0; j < Movies.GetLength(1); ++j)
+            List<String> movieGroup = movieGroups.ElementAt(i);
+            List<Int32> countGroup = countGroups.ElementAt(i);
+            for (int j = 0; j < movieGroup.Count; ++j)
             {
                 <tr>
-                @{
-                    if (j == 0)
-                    {
-                        <td>@Months[i]</td>
-                    }
-                    else
-                    {
-                        <td> </td>
-                    }
+                    @{
+                        if (j == 0)
+                        {
+                            <td>@monthLabels.ElementAt(i)</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
 
-                    <td>@Movies[i, j]</td>
-                    <td>@orders[i, j]</td>
-
-                }
+                        <td>@movieGroup.ElementAt(j)</td>
+                        <td>@countGroup.ElementAt(j)</td>
+                    }
                 </tr>
             }
+
         }
     }
 </table>
