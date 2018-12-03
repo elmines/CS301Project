@@ -60,7 +60,7 @@ namespace UAMovie.Controllers.ViewModelControllers
             ticketOrderViewModel.ticketOrder.SeniorTickets = seniorTickets;
             ticketOrderViewModel.ticketOrder.Username = userName;
             ticketOrderViewModel.ticketOrder.ShowingID = showingID;
-            ticketOrderViewModel.ticketOrder.Cost = 999.999;
+            //ticketOrderViewModel.ticketOrder.Cost = 999.999;
             ticketOrderViewModel.ticketOrder.insert();
             return View("~/Views/TicketOrder/OrderSuccess.cshtml",ticketOrderViewModel);
         }
