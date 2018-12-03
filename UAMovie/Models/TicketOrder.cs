@@ -6,12 +6,38 @@ using System.Threading.Tasks;
 
 namespace UAMovie.Models
 {
-    public class TicketOrder
+    public class TicketOrder : IComparable<TicketOrder>
     {
         public String ID { get; set; }
         public String ShowingID { get; set; }
         public String Username { get; set; }
         public String CardNumber { get; set; }
+
+        public int CompareTo(TicketOrder y)
+        {
+            return y.monthCode - monthCode;
+        }
+
+        public int monthCode
+        {
+            get
+            {
+                Database db = new Database();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = db.conn;
+                cmd.CommandText = String.Format("SELECT EXTRACT(MONTH FROM StartTime) FROM" +
+                    " Showing WHERE ID='{0}'", this.ShowingID);
+
+                OracleDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+
+                int monthCode = reader.GetInt32(0);
+                reader.Dispose();
+                cmd.Dispose();
+                db.Dispose();
+                return monthCode;
+            }
+        }
 
         public double Cost
         {
@@ -23,8 +49,8 @@ namespace UAMovie.Models
                 info.GetDiscounts();
 
                 double cost = moviePrice * (AdultTickets
-                                               + (1.0-info.ChildDiscount) * ChildTickets
-                                               + (1.0-info.SeniorDiscount) * SeniorTickets
+                                               + (1.0 - info.ChildDiscount) * ChildTickets
+                                               + (1.0 - info.SeniorDiscount) * SeniorTickets
                                             );
 
                 if (this.Status == "Cancelled")
@@ -57,6 +83,27 @@ namespace UAMovie.Models
                 return cost;
             }
         }
+
+        public String Month
+        {
+            get
+            {
+                if (monthCode == 1) return "January";
+                if (monthCode == 2) return "February";
+                if (monthCode == 3) return "March";
+                if (monthCode == 4) return "April";
+                if (monthCode == 5) return "May";
+                if (monthCode == 6) return "June";
+                if (monthCode == 7) return "July";
+                if (monthCode == 8) return "August";
+                if (monthCode == 9) return "September";
+                if (monthCode == 10) return "October";
+                if (monthCode == 11) return "November";
+                if (monthCode == 12) return "December";
+                return "December";
+            }
+        }
+
 
     
 

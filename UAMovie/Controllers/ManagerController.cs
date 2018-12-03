@@ -23,32 +23,28 @@ namespace UAMovie.Controllers
 
         public IActionResult RevenueReport()
         {
-            List<RevStats> stats = GetRevenueStats();
-            return View("~/Views/Manager/RevenueReport.cshtml", stats);
+            List<TicketOrder> orders = GetRevenueStats();
+            return View("~/Views/Manager/RevenueReport.cshtml", orders);
         }
 
-        public static List<RevStats> GetRevenueStats()
+        public static List<TicketOrder> GetRevenueStats()
         {
-            List<RevStats> stats = new List<RevStats>();
-
+            List<TicketOrder> stats = new List<TicketOrder>();
             Database db = new Database();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = db.conn;
-            cmd.CommandText = "SELECT " +
-                " EXTRACT(month from StartTime) AS ShowingMonth, AdultTickets, ChildTickets, SeniorTickets, MovieName" +
-                " FROM TicketOrder o INNER JOIN Showing s ON o.ShowingID=s.ID" +
-                "                    INNER JOIN Movie m   ON s.MovieName=m.Name";
-
+            cmd.CommandText = "SELECT o.AdultTickets, o.ChildTickets, o.SeniorTickets, o.Status, o.ShowingID" +
+                    " FROM TicketOrder o";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                stats.Add(new RevStats
+                stats.Add(new TicketOrder
                 {
-                    monthCode = reader.GetInt32(0),
-                    adultTickets = reader.GetInt32(1),
-                    childTickets = reader.GetInt32(2),
-                    seniorTickets = reader.GetInt32(3),
-                    movieName = reader.GetString(4)
+                    AdultTickets = reader.GetInt32(0),
+                    ChildTickets = reader.GetInt32(1),
+                    SeniorTickets = reader.GetInt32(2),
+                    Status = reader.GetString(3),
+                    ShowingID = reader.GetString(4)
                 });
             }
             reader.Dispose();

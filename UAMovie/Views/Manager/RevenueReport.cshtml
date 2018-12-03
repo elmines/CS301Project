@@ -1,8 +1,36 @@
-﻿@model List<UAMovie.Models.RevStats>
+﻿@model List<UAMovie.Models.TicketOrder>
 
 @{
     ViewData["Title"] = "Revenue Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    List<TicketOrder> orders = Model;
+    orders.Sort();
+
+    List<String> months = new List<string>();
+    List<Double> revenue = new List<double>();
+
+    months.Insert(0, orders.First().Month);
+    revenue.Insert(0, 0.0);
+    foreach (TicketOrder order in orders)
+    {
+
+        String month = order.Month;
+        if (month == months.First())
+        {
+            double currRev = revenue.First();
+            revenue.RemoveAt(0);
+            revenue.Insert(0, currRev + order.Cost);
+        }
+        else
+        {
+            months.Insert(0, order.Month);
+            revenue.Insert(0, order.Cost);
+        }
+    }
+
+    int x = 3;
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -16,14 +44,12 @@
     </thead>
 
     @{
-        String[] Months = { "August", "September", "November" };
-        float[] Revenue = { 2000.42f, 342.6f, 98.99f };
 
-        for (int i = 0; i < Months.Length; ++i)
+        for (int i = months.Count - 3; i < months.Count; ++i)
         {
             <tr>
-                <td>@Months[i]</td>
-                <td>@String.Format("{0:C2}", Revenue[i])</td>
+                <td>@months[i]</td>
+                <td>@String.Format("{0:C2}", revenue[i])</td>
             </tr>
         }
     }
