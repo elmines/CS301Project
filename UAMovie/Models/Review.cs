@@ -16,16 +16,7 @@ namespace UAMovie.Models
         public String Body { get; set; }
         public int rating { get; set; }
 
-        public bool canReview(String username)
-        {
-            Database db = new Database();
-            OracleCommand cmd = new OracleCommand();
 
-            cmd.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",
-                                            this.MovieName, username);
-
-            return true;
-        }
 
         public bool insert()
         {

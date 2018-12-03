@@ -30,34 +30,36 @@ namespace UAMovie.Models
 
         public bool canReview(String username)
         {
+            Boolean canReview = false;
             Database db = new Database();
 
             //Check if they've seen the movie
             OracleCommand cmd = new OracleCommand();
-            cmd.CommandText = String.Format("SELECT * FROM TicketOrder o" +
+            cmd.Connection = db.conn;
+            String queryString = String.Format("SELECT * FROM TicketOrder o" +
                 " INNER JOIN Showing s ON o.ShowingID = s.ID" +
                 " WHERE                   o.Status<>\'Cancelled\'" +
-                "  AND                    o.MovieName = \'{0}\'" +
+                "  AND                    s.MovieName = \'{0}\'" +
                 "  AND                    o.Username = \'{1}\'" +
                 "  AND (SELECT current_timestamp FROM dual) >= s.StartTime",
                 this.Name, username);
-            if (!cmd.ExecuteReader().HasRows)
+            cmd.CommandText = queryString;
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
             {
-                cmd.Dispose();
-                db.Dispose();
-                return false;
+                canReview = true;
+                //Check if they've already written a review
+                OracleCommand cmd2 = new OracleCommand();
+                cmd2.Connection = db.conn;
+                cmd2.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",
+                                this.Name, username);
+                if (cmd2.ExecuteReader().HasRows) canReview = false;
+                cmd2.Dispose();
             }
 
-
-            Boolean canReview = true;
-            //Check if they've already written a review
-            OracleCommand cmd2 = new OracleCommand();
-            cmd2.CommandText = String.Format("SELECT * FROM Review WHERE MovieName=\'{0}\' AND Username=\'{1}\'",
-                                            this.Name, username);
-            if (cmd2.ExecuteReader().HasRows) canReview = false;
-            cmd2.Dispose();
+            cmd.Dispose();
             db.Dispose();
-
             return canReview;
         }
 
