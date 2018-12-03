@@ -17,42 +17,94 @@ namespace UAMovie.Controllers.ViewModelControllers
             return View();
         }
 
-        // GET: SystemInfoAccountUser/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: SystemInfoAccountUser/Create
-        public ActionResult Create()
+        public ActionResult CreatePage()
         {
+            ViewBag.errorMessage = null;
             SystemInfoAccountUser user = new SystemInfoAccountUser();
             user.user = new AccountUser();
             user.info = new SystemInfo();
             return View("~/Views/AccountUser/Create.cshtml",user);
         }
 
+        public ActionResult Create(String errorMessage)
+        {
+            ViewBag.errorMessage = errorMessage;
+            SystemInfoAccountUser user = new SystemInfoAccountUser();
+            user.user = new AccountUser();
+            user.info = new SystemInfo();
+            return View("~/Views/AccountUser/Create.cshtml", user);
+        }
+
         // POST: SystemInfoAccountUser/Create
         [HttpPost]
         public ActionResult Create(SystemInfoAccountUser systemInfoAccountUser)
         {
+            ViewBag.errorMessage = null;
+
+            if (String.IsNullOrEmpty(systemInfoAccountUser.user.Username))
+            {
+                String errorMessage = "Please specify a Username";
+                return RedirectToAction("Create", "SystemInfoAccountUser",
+                    new { errorMessage = errorMessage });
+            }
+            if (String.IsNullOrEmpty(systemInfoAccountUser.user.EmailAddress))
+            {
+                String errorMessage = "Please specify an Email Address";
+                return RedirectToAction("Create", "SystemInfoAccountUser",
+                    new { errorMessage = errorMessage });
+            }
+            if (String.IsNullOrEmpty(systemInfoAccountUser.user.Password))
+            {
+                String errorMessage = "Please specify a Password";
+                return RedirectToAction("Create", "SystemInfoAccountUser",
+                    new { errorMessage = errorMessage });
+            }
+
             Database db = new Database();
+
+            //CHECKING FOR IDENTICAL EMAILS
+            OracleCommand emailCmd = new OracleCommand();
+            emailCmd.Connection = db.conn;
+            emailCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE" +
+                " EmailAddress='{0}'", systemInfoAccountUser.user.EmailAddress);
+            if (emailCmd.ExecuteReader().HasRows)
+            {
+                String errorMessage = String.Format("Email address {0} is already used.",
+                                                       systemInfoAccountUser.user.EmailAddress);
+                emailCmd.Dispose();
+                db.Dispose();
+                return RedirectToAction("Create", "SystemInfoAccountUser",
+                    new { errorMessage = errorMessage });
+            }
+            emailCmd.Dispose();
+
+            //CHECKING FOR IDENTICAL USERNAMES
+            OracleCommand nameCmd = new OracleCommand();
+            nameCmd.Connection = db.conn;
+            nameCmd.CommandText = String.Format("SELECT * FROM AccountUser WHERE" +
+                " Username='{0}'", systemInfoAccountUser.user.Username);
+            if (nameCmd.ExecuteReader().HasRows)
+            {
+                String errorMessage = String.Format("Username {0} is already used.",
+                                       systemInfoAccountUser.user.Username);
+                nameCmd.Dispose();
+                db.Dispose();
+                return RedirectToAction("Create", "SystemInfoAccountUser",
+                    new { errorMessage = errorMessage });
+            }
+
+            //CREATING A MANAGER
             String managerPassword = "";
             OracleCommand cmd = new OracleCommand();
-            String getManagerPassword = "select ManagerPassword from SystemInfo";
-
-            cmd.CommandText = getManagerPassword;
+            cmd.CommandText = "select ManagerPassword from SystemInfo";
             cmd.Connection = db.conn;
             cmd.CommandType = System.Data.CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                reader.Read();
-                managerPassword = reader.GetString(0);
-                reader.Dispose();
-            }
+            reader.Read();
+            managerPassword = reader.GetString(0);
+            reader.Dispose();
             String inputPassword = systemInfoAccountUser.info.ManagerPassword;
-            
             if (!String.IsNullOrEmpty(inputPassword))
             {
                 if (inputPassword.Equals(managerPassword))
@@ -62,68 +114,30 @@ namespace UAMovie.Controllers.ViewModelControllers
                     manager.user = systemInfoAccountUser.user;
                     manager.Username = systemInfoAccountUser.user.Username;
                     manager.insert();
+                    cmd.Dispose();
+                    db.Dispose();
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    //TODO: send error for invalid manager password
+                    String errorMessage = "Incorrect manager password";
+                    cmd.Dispose();
+                    db.Dispose();
+                    return RedirectToAction("Create", "SystemInfoAccountUser",
+                        new { errorMessage = errorMessage });
                 }
             }
-            else
-            {
-                systemInfoAccountUser.user.insert();
-                Customer customer = new Customer();
-                customer.username = systemInfoAccountUser.user.Username;
-                customer.insert();
-            }
+            cmd.Dispose();
+            db.Dispose();
+
+
+            systemInfoAccountUser.user.insert();
+            Customer customer = new Customer();
+            customer.username = systemInfoAccountUser.user.Username;
+            customer.insert();
                     
 
             return RedirectToAction("Index", "Home");
-        }
-
-        // GET: SystemInfoAccountUser/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SystemInfoAccountUser/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: SystemInfoAccountUser/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: SystemInfoAccountUser/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
