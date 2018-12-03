@@ -1,0 +1,60 @@
+﻿@model UAMovie.Models.ViewModels.TicketOrderViewModel
+
+@{
+    ViewData["Title"] = "EnterCardNumber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EnterCardNumber</h2>
+
+<h4>CreditCard</h4>
+<hr />
+
+@foreach (CreditCard creditCard in Model.creditCards)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(model => creditCard.CardNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Use Card", "Buy", "TicketOrderViewModel", new { creditCard = creditCard.CardNumber, adultTickets = Model.ticketOrder.AdultTickets, childTickets = Model.ticketOrder.ChildTickets, seniorTickets = Model.ticketOrder.SeniorTickets, userName = Model.userName, theaterID = Model.theaterID, movieName = Model.movieName, showingID = Model.showingID });
+        </td>
+    </tr>
+}
+
+@using (Html.BeginForm("Buy", "TicketOrderViewModel", FormMethod.Post, new { adultTickets = Model.ticketOrder.AdultTickets, childTickets = Model.ticketOrder.ChildTickets, seniorTickets = Model.ticketOrder.SeniorTickets, userName = Model.userName, theaterID = Model.theaterID, movieName = Model.movieName, showingID = Model.showing.ID }))
+{
+
+
+    @Html.LabelFor(model => model.creditCard.CardNumber);
+    @Html.EditorFor(model => model.creditCard.CardNumber);
+    <br />
+
+    @Html.LabelFor(model => model.creditCard.CVV);
+    @Html.EditorFor(model => model.creditCard.CVV);
+    <br />
+    @Html.LabelFor(model => model.creditCard.ExpirationDate);
+    @Html.EditorFor(model => model.creditCard.ExpirationDate);
+    <br />
+
+    @Html.LabelFor(model => model.creditCard.Holder);
+    @Html.EditorFor(model => model.creditCard.Holder);
+    <br />
+
+    @Html.LabelFor(model => model.creditCard.Saved);
+    @Html.EditorFor(model => model.creditCard.Saved);
+    <br />
+
+
+
+
+
+
+
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+
+}
+
+

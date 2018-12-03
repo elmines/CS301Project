@@ -1,0 +1,10 @@
+﻿@model UAMovie.Models.ViewModels.TicketOrderViewModel
+@{
+    ViewData["Title"] = "OrderSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.LabelFor(model => model.ticketOrder.ID);
+@Html.DisplayFor(model => model.ticketOrder.ID);
+
+<h2>OrderSuccess</h2>
+

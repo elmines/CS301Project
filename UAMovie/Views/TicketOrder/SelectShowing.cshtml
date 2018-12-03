@@ -10,7 +10,7 @@
 
 @foreach (Showing showing in Model.showings)
         {
-            {<tr><td>@Html.ActionLink(showing.StartTime.ToString(), "Buy", "TicketOrderViewModel", new { theaterID = Model.theaterID ,userName = Model.userName, movieName = Model.movieName,showingID = showing.ID })</td></tr>}
+            {<tr><td>@Html.ActionLink(showing.StartTime.ToString(), "EnterTickets", "TicketOrderViewModel", new { theaterID = Model.theaterID ,userName = Model.userName, movieName = Model.movieName, showingID = showing.ID })</td></tr>}
         }
 
             @*@using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))

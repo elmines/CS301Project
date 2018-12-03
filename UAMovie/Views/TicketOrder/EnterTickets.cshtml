@@ -8,8 +8,13 @@
 <h2>Buy</h2>
 
 <h4>TicketOrderViewModel</h4>
-@using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))
+@using (Html.BeginForm("EnterCardNumber", "TicketOrderViewModel", FormMethod.Post, new {ticketOrderViewModel = Model}))
 {
+    @Html.HiddenFor(model=>model.movieName)
+    @Html.HiddenFor(model => model.theaterID)
+    @Html.HiddenFor(model => model.userName)
+    @Html.HiddenFor(model => model.showing.ID)
+    @Html.HiddenFor(model => model.showingID)
     @Html.DisplayFor(model => model.theaterID)
     @Html.DisplayFor(model => model.theater.Name)
     @Html.DisplayFor(model => model.theater.StreetNumber)
@@ -46,6 +51,13 @@
 
     @Html.LabelFor(model => model.movieName);
     @Html.DisplayFor(model => model.movieName);
+
+    
+
+
+
+
+
 
     <input type="submit" value="Create" class="btn btn-default" />
 

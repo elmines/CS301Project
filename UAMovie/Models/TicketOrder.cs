@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess.Client;
 
 namespace UAMovie.Models
 {
@@ -16,6 +17,39 @@ namespace UAMovie.Models
         public int AdultTickets { get; set; }
         public int SeniorTickets { get; set; }
         public String Status { get; set; }
+
+        public void insert()
+        {
+            ID = this.getNewID();
+            Database db = new Database();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;                                                                                                               //id showingID username cardnumber cost ctick atcik stick status
+            String insertQuery = String.Format("INSERT INTO TicketOrder (ID,ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,Status) VALUES('{8}','{0}','{1}','{2}',{3},{4},{5},{6},'{7}')",ShowingID,Username,CardNumber,Cost,ChildTickets,AdultTickets,SeniorTickets,"Purchased",ID);
+            cmd.CommandText = insertQuery;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            db.Dispose();
+        }
+        public String getNewID()
+        {
+            Database db = new Database();
+
+            OracleCommand readCmd = new OracleCommand();
+            readCmd.Connection = db.conn;
+            readCmd.CommandText = "SELECT MAX(TO_NUMBER(ID))+1 FROM TicketOrder HAVING COUNT(ID) > 0";
+            OracleDataReader reader = readCmd.ExecuteReader();
+
+            String OrderID = "1";
+            if (reader.HasRows)
+            {
+                reader.Read();
+                OrderID = (String)reader.GetInt64(0).ToString();
+            }
+            this.ID = OrderID;
+            readCmd.Dispose();
+            return OrderID;
+        }
+
 
         public static TicketOrder[] testData()
         {

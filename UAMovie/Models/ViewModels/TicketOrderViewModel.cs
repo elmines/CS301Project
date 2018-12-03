@@ -13,12 +13,13 @@ namespace UAMovie.Models.ViewModels
         public Showing showing { get; set; }
         public List<Showing> showings { get; set; }
         public CreditCard creditCard { get; set; }
+        public List<CreditCard> creditCards { get; set; }
         public SystemInfo systemInfo { get; set; }
         public Theater theater { get; set; }
         public String theaterID { get; set; }
         public String userName { get; set; }
         public String movieName { get; set; }
-
+        public String showingID { get; set; }
         public TicketOrderViewModel()
         {
 

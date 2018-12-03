@@ -21,18 +21,49 @@ namespace UAMovie.Controllers.ViewModelControllers
             ticketOrderViewModel.theaterID = theaterID;
             return View("~/Views/TicketOrder/SelectShowing.cshtml", ticketOrderViewModel);
         }
-        public ActionResult Buy(String theaterID, String userName, String movieName)
+        public ActionResult EnterTickets(String theaterID, String userName, String movieName, String showingID)
         {
             TicketOrderViewModel ticketOrderViewModel = new TicketOrderViewModel();
             ticketOrderViewModel.userName = userName;
-            ticketOrderViewModel.showings = Showing.GetFutureShowings(movieName, theaterID);
-            ticketOrderViewModel.theater = Theater.GetTheater(theaterID);
+            ticketOrderViewModel.theaterID = theaterID;
             ticketOrderViewModel.systemInfo.GetDiscounts();
             ticketOrderViewModel.movieName = movieName;
-
-            return View("~/Views/TicketOrder/Buy.cshtml", ticketOrderViewModel);
+            ticketOrderViewModel.showingID = showingID;
+            
+            return View("~/Views/TicketOrder/EnterTickets.cshtml", ticketOrderViewModel);
         }
+        public ActionResult EnterCardNumber(TicketOrderViewModel ticketOrderViewModel)
+        {
+            //TicketOrderViewModel ticketOrderViewModel = new TicketOrderViewModel();
+            //ticketOrderViewModel.userName = userName;
+            //ticketOrderViewModel.theaterID = theaterID;
+            //ticketOrderViewModel.systemInfo.GetDiscounts();
+            //ticketOrderViewModel.movieName = movieName;
+            //ticketOrderViewModel.ticketOrder.AdultTickets = adultTickets;
+            //ticketOrderViewModel.ticketOrder.ChildTickets = childTickets;
+            //ticketOrderViewModel.ticketOrder.SeniorTickets = seniorTickets;
 
+            CreditCardAccountUserViewModel creditCardAccountUserViewModel = new CreditCardAccountUserViewModel();
+            creditCardAccountUserViewModel.user = new AccountUser();
+            creditCardAccountUserViewModel.user.Username = ticketOrderViewModel.userName;
+            creditCardAccountUserViewModel.loadSavedCards();
+
+            ticketOrderViewModel.creditCards = creditCardAccountUserViewModel.savedCards;
+            return View("~/Views/TicketOrder/EnterCardNumber.cshtml", ticketOrderViewModel);
+        }
+        public ActionResult Buy(String creditCard, int adultTickets, int childTickets, int seniorTickets, String userName, String theaterID, String movieName, String showingID)
+        {
+            TicketOrderViewModel ticketOrderViewModel = new TicketOrderViewModel();
+            ticketOrderViewModel.ticketOrder.CardNumber = creditCard;
+            ticketOrderViewModel.ticketOrder.AdultTickets = adultTickets;
+            ticketOrderViewModel.ticketOrder.ChildTickets = childTickets;
+            ticketOrderViewModel.ticketOrder.SeniorTickets = seniorTickets;
+            ticketOrderViewModel.ticketOrder.Username = userName;
+            ticketOrderViewModel.ticketOrder.ShowingID = showingID;
+            ticketOrderViewModel.ticketOrder.Cost = 999.999;
+            ticketOrderViewModel.ticketOrder.insert();
+            return View("~/Views/TicketOrder/OrderSuccess.cshtml",ticketOrderViewModel);
+        }
 
         // GET: TicketOrderViewModel
         public ActionResult Index()
