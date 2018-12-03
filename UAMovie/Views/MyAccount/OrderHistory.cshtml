@@ -1,4 +1,4 @@
-﻿@model UAMovie.Models.TicketOrder;
+﻿@model UAMovie.Models.ViewModels.TicketOrderAccountUserViewModel;
 @{
     ViewData["Title"] = "Order History";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,8 @@
 <table>
     <thead>
         <tr>
-          <th>Showing ID</th>
+          <th></th>
+          <th>Order ID</th>
           <th>Cost</th>
           <th>Adult Tickets</th>
           <th>Child Tickets</th>
@@ -19,11 +20,13 @@
     </thead>
 
     @{
-        TicketOrder[] orders = TicketOrder.testData();
+        List<TicketOrder> orders = Model.orders;
         foreach (TicketOrder o in orders)
         {
             <tr>
-                <td>@o.ShowingID</td>
+                <td>@Html.ActionLink("Details", "OrderDetails", "TicketOrderAccountUserViewModel",
+                                        new { username = Model.username, orderID = o.ID})</td>
+                <td>@o.ID</td>
                 <td>@String.Format("{0:C2}", o.Cost)</td>
                 <td>@o.AdultTickets</td>
                 <td>@o.ChildTickets</td>

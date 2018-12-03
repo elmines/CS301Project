@@ -12,6 +12,7 @@ namespace UAMovie.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.goodLogin = null;
             return View();
         }
         [HttpPost]
@@ -19,9 +20,11 @@ namespace UAMovie.Controllers
         {
             if(user.login())
             {
+                ViewBag.goodLogin = true;
                 return RedirectToAction("Login", "Accountuser", new {username = user.Username });
             }
             //Error message?
+            ViewBag.goodLogin = false;
             return View();
         }
         public IActionResult SignUp()

@@ -4,7 +4,7 @@
 }
 <h2>Welcome!</h2>
 <h4>Login</h4>
-@using (Html.BeginForm("Index","Home",new { user = Model }))
+@using (Html.BeginForm("Index", "Home", new { user = Model }))
 {
     @Html.LabelFor(model => model.Username);
     @Html.EditorFor(model => model.Username);
@@ -14,6 +14,12 @@
     @Html.EditorFor(model => model.Password);
 
     <input type="submit" value="Login" class="btn btn-default" />
-}
 
+
+    if (ViewBag.goodLogin == false)
+    {
+        <p style="color: red">Invalid login credentials. Try again.</p>
+    }
+
+}
 <p>Yet to experience the best movie site on the web? Sign up <a asp-area="" asp-controller="SystemInfoAccountUser" asp-action="Create">here</a>.</p>

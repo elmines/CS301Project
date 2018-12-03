@@ -8,7 +8,12 @@
 
 <ul>
     <li><a asp-area="" asp-action="NowPlaying">Now Playing</a></li>
-    <li><a asp-area="" asp-action="OrderHistory">Order History</a></li>
+
+    <li>
+        @Html.ActionLink("Order History", "OrderHistory", "TicketOrderAccountUserViewModel",
+            new {username = Model.Username })
+    </li>
+
 
     <li>
       @Html.ActionLink("My Payment Info", "PaymentInfo", "CreditCardAccountUserViewModel",
