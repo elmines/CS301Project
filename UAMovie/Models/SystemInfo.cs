@@ -22,7 +22,7 @@ namespace UAMovie.Models
             cmd.Connection = db.conn;
             //does this handle nulls? TO be determined...
             //does this handle nulls? TO be determined...
-            String readQuery = String.Format("select SeniorDiscount,ChildDiscount from SystemInfo");
+            String readQuery = String.Format("select SeniorDiscount,ChildDiscount, RefundFee from SystemInfo");
             cmd.CommandText = readQuery;
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -30,6 +30,7 @@ namespace UAMovie.Models
             {
                 this.SeniorDiscount = reader.GetDouble(0);
                 this.ChildDiscount= reader.GetDouble(1);
+                this.RefundFee = reader.GetDouble(2);
             }
 
             cmd.Dispose();
