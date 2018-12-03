@@ -10,8 +10,9 @@ namespace UAMovie.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
-        public ActionResult Me(AccountUser user)
+        public ActionResult Me(String username)
         {
+            AccountUser user = new AccountUser { Username = username };
             return View("~/Views/MyAccount/Index.cshtml",user);
         }
         public ActionResult NowPlaying(String username)

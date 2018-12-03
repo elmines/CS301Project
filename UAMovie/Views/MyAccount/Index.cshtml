@@ -1,4 +1,4 @@
-﻿
+﻿@model UAMovie.Models.AccountUser;
 @{
     ViewData["Title"] = "My Account";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,12 @@
 <ul>
     <li><a asp-area="" asp-action="NowPlaying">Now Playing</a></li>
     <li><a asp-area="" asp-action="OrderHistory">Order History</a></li>
-    <li><a asp-area="" asp-action="PaymentInfo">My Payment Info</a></li>
+
+    <li>
+      @Html.ActionLink("My Payment Info", "PaymentInfo", "CreditCardAccountUserViewModel",
+        new { username = Model.Username })
+    </li>
+
     <li><a asp-area="" asp-action="PreferredTheater">My Preferred Theaters</a></li>
 </ul>
 <p>@Html.ActionLink("Log out", "LoginForm", "AccountUser")</p>
