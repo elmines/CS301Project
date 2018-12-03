@@ -1,0 +1,53 @@
+﻿@model UAMovie.Models.ViewModels.TicketOrderViewModel
+
+@{
+    ViewData["Title"] = "Buy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Buy</h2>
+
+<h4>TicketOrderViewModel</h4>
+@using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))
+{
+    @Html.DisplayFor(model => model.theaterID)
+    @Html.DisplayFor(model => model.theater.Name)
+    @Html.DisplayFor(model => model.theater.StreetNumber)
+    @Html.DisplayFor(model => model.theater.Street)
+    @Html.DisplayFor(model => model.theater.State)
+    @Html.DisplayFor(model => model.theater.Zip)
+    <br />
+
+
+    @Html.LabelFor(model => model.ticketOrder.AdultTickets);
+    @Html.EditorFor(model => model.ticketOrder.AdultTickets);
+    <br />
+
+    @Html.LabelFor(model => model.ticketOrder.ChildTickets);
+    @Html.EditorFor(model => model.ticketOrder.ChildTickets);
+    <br />
+
+    @Html.LabelFor(model => model.ticketOrder.SeniorTickets);
+    @Html.EditorFor(model => model.ticketOrder.SeniorTickets);
+    <br />
+
+    @Html.LabelFor(model => model.systemInfo.ChildDiscount);
+    @Html.DisplayFor(model => model.systemInfo.ChildDiscount);
+    <br />
+
+    @Html.LabelFor(model => model.ticketOrder.ChildTickets);
+    @Html.DisplayFor(model => model.ticketOrder.ChildTickets);
+    <br />
+
+    @Html.LabelFor(model => model.ticketOrder.SeniorTickets);
+    @Html.DisplayFor(model => model.ticketOrder.SeniorTickets);
+    <br />
+
+
+    @Html.LabelFor(model => model.movieName);
+    @Html.DisplayFor(model => model.movieName);
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+
+}

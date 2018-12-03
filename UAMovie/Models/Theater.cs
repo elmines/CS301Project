@@ -16,6 +16,34 @@ namespace UAMovie.Models
         public String StreetNumber { get; set; }
         public String Street { get; set; }
         public String Zip { get; set; }
+        public static Theater GetTheater(String ID)
+        {
+            Database db = new Database();
+
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = db.conn;
+            //does this handle nulls? TO be determined...
+            //does this handle nulls? TO be determined...
+            String readQuery = String.Format("select * from theater where theater.ID ='{0}'", ID);
+            cmd.CommandText = readQuery;
+            OracleDataReader reader = cmd.ExecuteReader();
+            Theater theater = new Theater();
+            
+            while (reader.Read())//gets a row or exits the loop if no more
+            {
+                theater.ID = reader.GetString(0);
+                theater.Name = reader.GetString(1);
+                theater.State = reader.GetString(2);
+                theater.City = reader.GetString(3);
+                theater.StreetNumber = reader.GetString(4);
+                theater.Street = reader.GetString(5);
+                theater.Zip = reader.GetString(6);
+            }
+
+            cmd.Dispose();
+            db.Dispose();
+            return theater;
+        }
 
         public static List<Theater> SearchTheaters(String searchName)
         {

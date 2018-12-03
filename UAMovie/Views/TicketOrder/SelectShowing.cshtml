@@ -1,0 +1,45 @@
+﻿@model UAMovie.Models.ViewModels.TicketOrderViewModel
+
+@{
+    ViewData["Title"] = "Select Showing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Buy</h2>
+
+<h4>TicketOrderViewModel</h4>
+
+@foreach (Showing showing in Model.showings)
+        {
+            {<tr><td>@Html.ActionLink(showing.StartTime.ToString(), "Buy", "TicketOrderViewModel", new { theaterID = Model.theaterID ,userName = Model.userName, movieName = Model.movieName,showingID = showing.ID })</td></tr>}
+        }
+
+            @*@using (Html.BeginForm("Create", "SystemInfoAccountUser", FormMethod.Post, new { systemInfoAccountUser = Model }))
+            {
+                @Html.DisplayFor(model => model.theaterID)
+                @Html.DisplayFor(model => model.theater.Name)
+                @Html.DisplayFor(model => model.theater.StreetNumber)
+                @Html.DisplayFor(model => model.theater.Street)
+                @Html.DisplayFor(model => model.theater.State)
+                @Html.DisplayFor(model => model.theater.Zip)
+
+                @Html.LabelFor(model => model.movieName);
+                @Html.DisplayFor(model => model.movieName);
+
+                foreach (Showing showing in Model.showings)
+                {
+                    <tr>
+                        <td>@Html.RadioButtonFor(model => model.showing.ID, showing.StartTime)</td>
+                        <td>@showing.ID</td>
+                        <td>@showing.TheaterID</td>
+                        <td>@showing.MovieName</td>
+                        <td>@showing.StartTime</td>
+                    </tr>
+                }
+
+
+
+
+                <input type="submit" value="Create" class="btn btn-default" />
+
+
+            }*@

@@ -14,22 +14,23 @@ namespace UAMovie.Controllers.ViewModelControllers
         {
             TheaterViewModel theaterViewModel = new TheaterViewModel();
             theaterViewModel.customer = new Customer();
-            theaterViewModel.customer.username = userName;
+            theaterViewModel.userName = userName;
             theaterViewModel.GetPreferredTheaters();
+            theaterViewModel.movieName = movieName;
             return View("~/Views/Theater/SearchForTheaters.cshtml",theaterViewModel);
         }
         [HttpPost]
-        public ActionResult DisplaySearchedTheaters(String searchName, String userName)
+        public ActionResult DisplaySearchedTheaters(String searchName, String userName, String movieName)
         {
             TheaterViewModel theaterViewModel = new TheaterViewModel();
             theaterViewModel.customer = new Customer();
-            theaterViewModel.customer.username = userName;
-            
+            theaterViewModel.userName = userName;
+            theaterViewModel.movieName = movieName;
 
             theaterViewModel.foundTheaters = Theater.SearchTheaters(searchName);
             if (theaterViewModel.foundTheaters.Count == 0)//no theaters found
             {
-                return RedirectToAction("SearchForTheaters", "Theater", new { errorText = "No results found." });
+                return RedirectToAction("SearchForTheaters", "Theater", new { userName = userName,movieName = movieName, errorText = "No results found." });
             }
             return View("~/Views/Theater/DisplaySearchedTheaters.cshtml", theaterViewModel);
         }

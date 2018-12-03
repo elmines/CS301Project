@@ -15,6 +15,8 @@ namespace UAMovie.Models.ViewModels
         public List<Theater> foundTheaters { get; set; }
         public String errorText { get; set; }
         public String searchName { get; set; }
+        public String movieName { get; set; }
+        public String userName { get; set; }
 
         public void GetPreferredTheaters()// puts the preffered theaters in the list.
         {

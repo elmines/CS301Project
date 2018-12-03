@@ -11,9 +11,29 @@ namespace UAMovie.Controllers.ViewModelControllers
 {
     public class TicketOrderViewModelController : Controller
     {
-        
-        
-        
+        public ActionResult SelectShowing(String theaterID,String userName,String movieName)
+        {
+            TicketOrderViewModel ticketOrderViewModel = new TicketOrderViewModel();
+            ticketOrderViewModel.userName = userName;
+            ticketOrderViewModel.showings = Showing.GetFutureShowings(movieName, theaterID);
+            ticketOrderViewModel.theater = Theater.GetTheater(theaterID);
+            ticketOrderViewModel.movieName = movieName;
+            ticketOrderViewModel.theaterID = theaterID;
+            return View("~/Views/TicketOrder/SelectShowing.cshtml", ticketOrderViewModel);
+        }
+        public ActionResult Buy(String theaterID, String userName, String movieName)
+        {
+            TicketOrderViewModel ticketOrderViewModel = new TicketOrderViewModel();
+            ticketOrderViewModel.userName = userName;
+            ticketOrderViewModel.showings = Showing.GetFutureShowings(movieName, theaterID);
+            ticketOrderViewModel.theater = Theater.GetTheater(theaterID);
+            ticketOrderViewModel.systemInfo.GetDiscounts();
+            ticketOrderViewModel.movieName = movieName;
+
+            return View("~/Views/TicketOrder/Buy.cshtml", ticketOrderViewModel);
+        }
+
+
         // GET: TicketOrderViewModel
         public ActionResult Index()
         {

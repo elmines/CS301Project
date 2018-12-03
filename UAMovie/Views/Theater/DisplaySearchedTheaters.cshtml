@@ -32,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.foundTheaters)
+        @foreach (Theater item in Model.foundTheaters)
         {
             <tr>
                 <td>
@@ -56,7 +56,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Zip)
                 </td>
+                <td>
+                    @Html.ActionLink("Select","SelectShowing", "TicketOrderViewModel", new { theaterID = item.ID, userName = Model.userName,movieName = Model.movieName});
+                </td>
+                @Html.HiddenFor(model => item.ID)
+                @Html.HiddenFor(model => model.userName)
+                @Html.HiddenFor(model => model.movieName)
             </tr>
+           
         }
     </tbody>
 </table>

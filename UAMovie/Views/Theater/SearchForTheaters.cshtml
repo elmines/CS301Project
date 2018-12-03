@@ -55,8 +55,10 @@
                 </td>
             </tr>
         }
-        @using (Html.BeginForm("DisplaySearchedTheaters", "TheaterViewModel", FormMethod.Post, new { searchName = Model.searchName, userName = Model.customer.username }))
+        @using (Html.BeginForm("DisplaySearchedTheaters", "TheaterViewModel", FormMethod.Post, new { searchName = Model.searchName, userName = Model.userName,movieName = Model.movieName }))
         {
+            @Html.HiddenFor(model => model.userName);
+            @Html.HiddenFor(model => model.movieName);
             @Html.EditorFor(model => model.searchName);
 
             <input type="submit" value="Search" class="btn btn-default" />
